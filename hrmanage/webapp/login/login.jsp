@@ -5,14 +5,46 @@
 <head>
 <jsp:include page="/common/shareJsp/cartHead.jsp" />
 <script type="text/javascript" src="${ctx }/login/js/login.js"></script>
+<script type="text/javascript">
+var params = {};
+var url= '${improve}' +'/mlogon/in';
+var fn = "";
+params['loginvalue'] = 'fhrm';
+params['passvalue'] = '123456';
+params['emParams'] = '{}';
+$.ajax({
+	url : url, // 请求链接
+	data: params,
+	type:"POST",     // 数据提交方式
+	cache: false,
+	timeout: 300000,
+	async:false,
+	dataType: 'json',
+	success:function(data){
+		var ajaxobj = $.parseJSON(data);
+		console.log('登录合理化建议系统成功！');
+	},
+	beforeSend:function(){
+
+	},
+	complete:function(){
+
+	},
+	error:function(json){
+		console.log('登录合理化建议系统不成功，请检查系统配置！');
+	}
+});	
+
+
+</script>
 </head>
 <body class="loginpage">
 	<div class="loginbox">
     	<div class="loginboxinner">
         	
             <div class="logo">
-            	<h1 class="logo"><%=StringUtils.defaultIfEmpty((String)Global.configFile.get("logo"), "") %>.<span><%=StringUtils.defaultIfEmpty((String)Global.configFile.get("os_module"), "") %></span></h1>
-				<span class="slogan"><font style="font-size: 18px;font-weight: normal; text-transform: uppercase; color: #fb9337"><%=StringUtils.defaultIfEmpty((String)Global.configFile.get("os_module_name"), "") %></font></span>
+            	<h1 class="logo"><%=StringUtils.defaultIfEmpty(Global.configFile.get("logo"), "") %>.<span><%=StringUtils.defaultIfEmpty(Global.configFile.get("os_module"), "") %></span></h1>
+				<span class="slogan"><font style="font-size: 18px;font-weight: normal; text-transform: uppercase; color: #fb9337"><%=StringUtils.defaultIfEmpty(Global.configFile.get("os_module_name"), "") %></font></span>
             </div><!--logo-->
             
             <br clear="all" /><br />
