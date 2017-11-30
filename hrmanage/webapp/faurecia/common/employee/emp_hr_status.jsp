@@ -9,7 +9,7 @@
 	<%
 	int i=0;
 	for(Integer key:Global.hrStatusMap.keySet()) {
-		String status_code = Global.hrStatusMap.get(key);
+		String status_code =(String) Global.hrStatusMap.get(key);
 	%>
 	<option value="<%=key.intValue()%>" <%=i==0||hr_status_id==key.intValue()?"selected":"" %>><%=status_code %>
 	<%i++;} %>

@@ -43,8 +43,8 @@ $.ajax({
     	<div class="loginboxinner">
         	
             <div class="logo">
-            	<h1 class="logo"><%=StringUtils.defaultIfEmpty(Global.configFile.get("logo"), "") %>.<span><%=StringUtils.defaultIfEmpty(Global.configFile.get("os_module"), "") %></span></h1>
-				<span class="slogan"><font style="font-size: 18px;font-weight: normal; text-transform: uppercase; color: #fb9337"><%=StringUtils.defaultIfEmpty(Global.configFile.get("os_module_name"), "") %></font></span>
+            	<h1 class="logo"><%=StringUtils.defaultIfEmpty((String)Global.configFile.get("logo"), "") %>.<span><%=StringUtils.defaultIfEmpty((String)Global.configFile.get("os_module"), "") %></span></h1>
+				<span class="slogan"><font style="font-size: 18px;font-weight: normal; text-transform: uppercase; color: #fb9337"><%=StringUtils.defaultIfEmpty((String)Global.configFile.get("os_module_name"), "") %></font></span>
             </div><!--logo-->
             
             <br clear="all" /><br />
