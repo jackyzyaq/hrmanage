@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.authority.pojo.UserInfo">
+
+	<typeAlias alias="UserInfo" type="com.yq.authority.pojo.UserInfo"/>
+  	
+  	<select id="queryBySql" resultClass="UserInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="UserInfo">
+  		INSERT INTO tb_user_info (name,pwd,zh_name,upload_uuid,state,create_date,update_date,last_date,email)
+     	VALUES (#name#,#pwd#,#zh_name#,#upload_uuid#,#state#,getdate(),getdate(),#last_date#,#email#)
+     	<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+  	</insert> 	
+  	
+  	<insert id="saveUserRole" parameterClass="java.util.Map">
+		insert into tb_user_role (user_id,role_id)
+					     values (#user_id#,#role_id#)  	
+	</insert>  	
+  	
+  	<update id="update" parameterClass="UserInfo">
+  		update 	tb_user_info 
+  		set 	name=#name#,
+  				pwd=#pwd#,
+  				zh_name=#zh_name#,
+  				upload_uuid=#upload_uuid#,
+  				state=#state#,
+  				update_date=getdate(),
+  				last_date=#last_date#,
+  				email=#email#
+  		where 	id=#id#
+  	</update>   
+  	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>
+  	
+</sqlMap>

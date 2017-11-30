@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.DepartmentInfo">
+
+	<typeAlias alias="DepartmentInfo" type="com.yq.faurecia.pojo.DepartmentInfo"/>
+  	
+  	<select id="findById" resultClass="DepartmentInfo" parameterClass="Integer" remapResults="true">
+  		 select id,
+		        parent_id,
+		        (select dept_code from tb_department_info where id=t.parent_id) parent_dept_code,        
+		        (select dept_name from tb_department_info where id=t.parent_id) parent_dept_name,
+		        dept_code,dept_name,create_date,update_date,description,state
+		 from tb_department_info t 
+  		 where id = #id# and state = 1
+  	</select>
+  	
+  	<select id="findByParentId" resultClass="DepartmentInfo" parameterClass="Integer" remapResults="true">
+		 select id,
+		        parent_id,
+		        (select dept_code from tb_department_info where id=t.parent_id) parent_dept_code,        
+		        (select dept_name from tb_department_info where id=t.parent_id) parent_dept_name,
+		        dept_code,dept_name,create_date,update_date,description,state
+		 from tb_department_info t 
+  		 where parent_id = #parent_id# and state = 1
+  		 order by  CHARINDEX(dept_code,'PLANT,UAP1,UAP2,PCL,Quality,FM,Engineering,HR,GMO,Finance,其他') ASC
+  	</select>
+  	
+  	<select id="findByDeptCode" resultClass="DepartmentInfo" parameterClass="String" remapResults="true">
+		 select id,
+		        parent_id,
+		        (select dept_code from tb_department_info where id=t.parent_id) parent_dept_code,        
+		        (select dept_name from tb_department_info where id=t.parent_id) parent_dept_name,
+		        dept_code,dept_name,create_date,update_date,description,state 
+		 from tb_department_info t 
+  		 where dept_code = #dept_code# and state = 1
+  	</select>  	
+  	
+  	<select id="findBySql" resultClass="DepartmentInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="DepartmentInfo">
+  		insert into tb_department_info (
+  			parent_id,dept_code,dept_name,create_date,update_date,description,state
+  		) values (
+  			#parent_id#,#dept_code#,#dept_name#,getdate(),getdate(),#description#,#state#
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<insert id="saveDeptRole" parameterClass="java.util.Map">
+		insert into t_department_role (dept_id,role_id)
+					     values (#dept_id#,#role_id#)  	
+	</insert>	
+	
+  	<update id="update" parameterClass="DepartmentInfo">
+		update tb_department_info 
+		   set 	parent_id=#parent_id#,
+		   		dept_code=#dept_code#,
+		   		dept_name=#dept_name#,
+		   		update_date=getdate(),
+		   		description=#description#,
+		   		state = #state#
+		 where id = #id#
+	</update>	
+	
+  	<delete id="deleteById" parameterClass="Integer">
+  		delete from tb_department_info where id = #id#
+  	</delete>
+  	
+  	<delete id="deleteByIds" parameterClass="String">
+  		delete from tb_department_info where id in($ids$)
+  	</delete>
+  	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

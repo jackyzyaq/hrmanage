@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.authority.pojo.RoleInfo">
+
+	<typeAlias alias="RoleInfo" type="com.yq.authority.pojo.RoleInfo"/>
+  	
+  	<select id="findById" resultClass="RoleInfo" parameterClass="Integer" remapResults="true">
+  		select t.id,t.role_code,t.role_name,
+  			   t.parent_id,
+  			   (select tt.role_code from tb_role_info tt where tt.id=t.parent_id) parent_code,
+  			   (select tt.role_name from tb_role_info tt where tt.id=t.parent_id) parent_name,
+  			   t.description,t.create_date,update_date,state 
+		  from tb_role_info t 
+  		 where id = #id# and state = 1
+  	</select>
+  	
+  	<select id="findByRoleCode" resultClass="RoleInfo" parameterClass="String"  remapResults="true">
+  		select t.id,t.role_code,t.role_name,t.parent_id,
+  			   (select tt.role_code from tb_role_info tt where tt.id=t.parent_id) parent_code,
+  			   (select tt.role_name from tb_role_info tt where tt.id=t.parent_id) parent_name,
+  			   t.description,t.create_date,update_date,state 
+		  from tb_role_info t 
+  		 where role_code = #role_code# and state = 1
+  	</select>
+  	
+  	<select id="findForList" resultClass="String" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>  	
+  	
+  	<select id="findBySql" resultClass="RoleInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="RoleInfo">
+		insert into tb_role_info (role_code,role_name,parent_id,description,state,create_date,update_date)
+					     values (#role_code#,#role_name#,#parent_id#,#description#,#state#,getdate(),getdate())  	
+	</insert>
+	
+  	<update id="update" parameterClass="RoleInfo">
+		update tb_role_info 
+		   set 	role_code=#role_code#,role_name=#role_name#,parent_id=#parent_id#,description=#description#,
+		   		state = #state#,
+		   		update_date=getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	
+  	
+  	<delete id="deleteById" parameterClass="Integer">
+  		delete from tb_role_info where id = #id#
+  	</delete>
+  	
+  	<delete id="deleteByIds" parameterClass="String">
+  		delete from tb_role_info where id in($ids$)
+  	</delete>
+  	
+</sqlMap>

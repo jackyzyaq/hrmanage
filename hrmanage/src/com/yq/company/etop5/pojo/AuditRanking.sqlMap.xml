@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.AuditRanking">
+
+	<typeAlias alias="AuditRanking" type="com.yq.company.etop5.pojo.AuditRanking"/>
+  	
+  	<select id="findBySql" resultClass="AuditRanking" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="AuditRanking">
+  		insert into etop5.dbo.tb_audit_ranking (
+  			dept_id,gl,begin_month,end_month,kpi_1,kpi_2,kpi_3,kpi_4,over_all,operater,create_date,update_date
+  		) values (
+  			#dept_id#,#gl#,#begin_month#,#end_month#,#kpi_1#,#kpi_2#,#kpi_3#,#kpi_4#,#over_all#,#operater#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="AuditRanking">
+		update etop5.dbo.tb_audit_ranking 
+		   set 	
+				dept_id=#dept_id#,
+				gl=#gl#,
+				begin_month=#begin_month#,
+				end_month=#end_month#,
+				kpi_1=#kpi_1#,
+				kpi_2=#kpi_2#,
+				kpi_3=#kpi_3#,
+				kpi_4=#kpi_4#,
+				over_all=#over_all#,
+				operater=#operater#,
+				update_date=getdate()
+		 where id = #id#
+	</update>
+	
+	<insert id="saveHeader" parameterClass="AuditRanking">
+  		insert into etop5.dbo.tb_audit_ranking_header (
+  			type,begin_month,end_month,header_1,header_2,header_3,header_4,operater,create_date,update_date
+  		) values (
+  			#type#,#begin_month#,#end_month#,#header_1#,#header_2#,#header_3#,#header_4#,#operater#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="updateHeader" parameterClass="AuditRanking">
+		update etop5.dbo.tb_audit_ranking_header 
+		   set 	
+				type=#type#,
+				begin_month=#begin_month#,
+				end_month=#end_month#,
+				header_1=#header_1#,
+				header_2=#header_2#,
+				header_3=#header_3#,
+				header_4=#header_4#,
+				operater=#operater#,
+				update_date=getdate()
+		 where id = #id#
+	</update>			
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.ManagementSchedule">
+
+	<typeAlias alias="ManagementSchedule" type="com.yq.company.etop5.pojo.ManagementSchedule"/>
+  	<select id="findBySql" resultClass="ManagementSchedule" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="ManagementSchedule">
+  		insert into etop5.dbo.tb_management_schedule (
+  			tb_name,tb_schedule_date,tb_status_am,tb_status_pm,tb_backup,create_date,update_date,tb_create_user,tb_update_user,state
+  		) values (
+  			#tb_name#,#tb_schedule_date#,#tb_status_am#,#tb_status_pm#,#tb_backup#,getdate(),getdate(),#tb_create_user#,#tb_update_user#,#state#
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="ManagementSchedule">
+		update etop5.dbo.tb_management_schedule 
+		   set 	
+		   		tb_name=#tb_name#,
+				tb_schedule_date=#tb_schedule_date#,
+				tb_status_am=#tb_status_am#,
+				tb_status_pm=#tb_status_pm#,
+				tb_backup=#tb_backup#,
+				update_date=getdate(),
+				tb_create_user=#tb_create_user#,
+				tb_update_user=#tb_update_user#,
+				state=#state#
+		 where id = #id#
+	</update>
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

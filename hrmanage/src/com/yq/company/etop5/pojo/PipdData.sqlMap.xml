@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.PipdData">
+
+	<typeAlias alias="PipdData" type="com.yq.company.etop5.pojo.PipdData"/>
+  	
+  	<select id="findBySql" resultClass="PipdData" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="PipdData">
+  		insert into etop5.dbo.tb_pipd_data (
+  			type,sub_type,report_date,reality_pipd_data,must_pipd_data,state,operater,create_date,update_date
+  		) values (
+  		#type#,#sub_type#,#report_date#,#reality_pipd_data#,#must_pipd_data#,#state#,#operater#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="PipdData">
+		update etop5.dbo.tb_pipd_data 
+		   set 	
+				type=#type#,
+				sub_type=#sub_type#,
+				report_date=#report_date#,
+				reality_pipd_data=#reality_pipd_data#,
+				must_pipd_data=#must_pipd_data#,
+				state=#state#,
+				operater=#operater#,
+				update_date=getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

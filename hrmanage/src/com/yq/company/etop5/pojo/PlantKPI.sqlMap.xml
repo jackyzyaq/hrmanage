@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.PlantKPI">
+
+	<typeAlias alias="PlantKPI" type="com.yq.company.etop5.pojo.PlantKPI"/>
+  	
+  	<select id="findBySql" resultClass="PlantKPI" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="PlantKPI">
+  		insert into etop5.dbo.tb_plant_kpi (
+  			kpi_date,kpi_type,title,subtitle,target,actual,cum,remark,health_png,operater,dept_name,ext_1,ext_2,ext_3,ext_4,ext_5,ext_6,ext_7,ext_8,ext_9,ext_10,target_flag,is_auto_cum,create_date,update_date
+  		) values (
+  			#kpi_date#,#kpi_type#,#title#,#subtitle#,#target#,#actual#,#cum#,#remark#,#health_png#,#operater#,#dept_name#,#ext_1#,#ext_2#,#ext_3#,#ext_4#,#ext_5#,#ext_6#,#ext_7#,#ext_8#,#ext_9#,#ext_10#,#target_flag#,#is_auto_cum#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="PlantKPI">
+		update etop5.dbo.tb_plant_kpi 
+		   set 	
+				kpi_date = #kpi_date#,
+				kpi_type = #kpi_type#,
+				title = #title#,
+				subtitle = #subtitle#,
+				target = #target#,
+				actual = #actual#,
+				cum = #cum#,
+				remark = #remark#,
+				health_png = #health_png#,
+				operater = #operater#,
+				update_date=getdate(),
+				dept_name=#dept_name#,
+				ext_1=#ext_1#,
+				ext_2=#ext_2#,
+				ext_3=#ext_3#,
+				ext_4=#ext_4#,
+				ext_5=#ext_5#,
+				ext_6=#ext_6#,
+				ext_7=#ext_7#,
+				ext_8=#ext_8#,
+				ext_9=#ext_9#,
+				ext_10=#ext_10#,
+				target_flag=#target_flag#,
+				is_auto_cum=#is_auto_cum#
+		 where id = #id#
+	</update>
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

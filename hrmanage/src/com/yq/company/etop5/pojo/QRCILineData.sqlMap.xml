@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.QRCILineData">
+
+	<typeAlias alias="QRCILineData" type="com.yq.company.etop5.pojo.QRCILineData"/>
+  	
+  	<select id="findBySql" resultClass="QRCILineData" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="QRCILineData">
+  		insert into etop5.dbo.tb_qrci_line_data (
+  			number,opening_date,dept_id,problem_discription,standards_check,cause_analysis,updates,signed_by_employee,remark,is_close,is_re_happend,is_up,up_number,ext_1,ext_2,ext_3,ext_4,ext_5,create_user,update_user,create_date,update_date
+  		) values (
+  			#number#,#opening_date#,#dept_id#,#problem_discription#,#standards_check#,#cause_analysis#,#updates#,#signed_by_employee#,#remark#,#is_close#,#is_re_happend#,#is_up#,#up_number#,#ext_1#,#ext_2#,#ext_3#,#ext_4#,#ext_5#,#create_user#,#update_user#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="QRCILineData">
+		update etop5.dbo.tb_qrci_line_data 
+		   set 	
+				number=#number#,
+				opening_date=#opening_date#,
+				dept_id=#dept_id#,
+				problem_discription=#problem_discription#,
+				standards_check=#standards_check#,
+				cause_analysis=#cause_analysis#,
+				updates=#updates#,
+				signed_by_employee=#signed_by_employee#,
+				remark=#remark#,
+				is_close=#is_close#,
+				is_re_happend=#is_re_happend#,
+				is_up=#is_up#,
+				up_number=#up_number#,
+				ext_1=#ext_1#,
+				ext_2=#ext_2#,
+				ext_3=#ext_3#,
+				ext_4=#ext_4#,
+				ext_5=#ext_5#,
+				update_user=#update_user#,
+				update_date=getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>
+	
+	
+	<!--   Ext  -->
+	<insert id="saveExt" parameterClass="QRCILineData">
+  		insert into etop5.dbo.tb_qrci_line_data_ext (
+  			qrci_line_id,action,handler,deadline,val_date,class_name,is_ok,create_user,update_user,create_date,update_date,ext_1,ext_2,ext_3,ext_4,ext_5
+  		) values (
+  			#qrci_line_id#,#action#,#handler#,#deadline#,#val_date#,#class_name#,#is_ok#,#create_user#,#update_user#,getdate(),getdate(),#ext_1#,#ext_2#,#ext_3#,#ext_4#,#ext_5#
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey>
+	</insert>	
+	
+	<update id="updateExt" parameterClass="QRCILineData">
+		update etop5.dbo.tb_qrci_line_data_ext
+		   set 	
+				qrci_line_id=#qrci_line_id#,
+				action=#action#,
+				handler=#handler#,
+				deadline=#deadline#,
+				val_date=#val_date#,
+				class_name=#class_name#,
+				is_ok=#is_ok#,
+				ext_1=#ext_1#,
+				ext_2=#ext_2#,
+				ext_3=#ext_3#,
+				ext_4=#ext_4#,
+				ext_5=#ext_5#,
+				update_user=#update_user#,
+				update_date=getdate()
+		 where id = #id#	
+	</update>	
+</sqlMap>

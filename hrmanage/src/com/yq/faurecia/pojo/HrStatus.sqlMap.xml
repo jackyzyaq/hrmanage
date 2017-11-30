@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.HrStatus">
+
+	<typeAlias alias="HrStatus" type="com.yq.faurecia.pojo.HrStatus"/>
+  	
+  	<select id="findBySql" resultClass="HrStatus" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="HrStatus">
+  		insert into tb_hr_status (
+  			status_code,state,create_date
+  		) values (
+  			#status_code#,#state#,getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<update id="update" parameterClass="HrStatus">
+		update tb_hr_status 
+		   set 	
+				status_code=#status_code#,
+				state=#state#
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

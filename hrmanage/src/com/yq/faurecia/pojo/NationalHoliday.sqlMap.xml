@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.NationalHoliday">
+
+	<typeAlias alias="NationalHoliday" type="com.yq.faurecia.pojo.NationalHoliday"/>
+  	
+  	<select id="findById" resultClass="NationalHoliday" parameterClass="Integer" remapResults="true">
+  		 select 
+  		 	 id,holiday_name,holiday,state,remark,create_date,update_date
+		 from tb_nationalholiday_info t 
+  		 where id = #id# and state = 1
+  	</select>
+  	
+  	<select id="findByHolidayName" resultClass="NationalHoliday" parameterClass="String" remapResults="true">
+		 select 
+  		 	 id,holiday_name,holiday,state,remark,create_date,update_date
+		 from tb_nationalholiday_info t 
+  		 where holiday_name = #holiday_name# and state = 1
+  	</select>  	
+  	
+  	<select id="findBySql" resultClass="NationalHoliday" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="NationalHoliday">
+  		insert into tb_nationalholiday_info (
+  			holiday_name,holiday,state,remark,create_date,update_date
+  		) values (
+  			#holiday_name#,#holiday#,#state#,#remark#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<update id="update" parameterClass="NationalHoliday">
+		update tb_nationalholiday_info 
+		   set 	holiday_name = #holiday_name#,
+				holiday = #holiday#,
+				state = #state#,
+				remark = #remark#,
+				update_date = getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

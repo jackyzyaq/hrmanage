@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.SupervisorRanking">
+
+	<typeAlias alias="SupervisorRanking" type="com.yq.company.etop5.pojo.SupervisorRanking"/>
+  	
+  	<select id="findBySql" resultClass="SupervisorRanking" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="SupervisorRanking">
+  		insert into etop5.dbo.tb_supervisor_monthly_ranking (
+  			dept_id,supervisor,begin_month,end_month,kpi_1,kpi_2,kpi_3,kpi_4,kpi_5,kpi_6,over_all,operater,create_date,update_date
+  		) values (
+  			#dept_id#,#supervisor#,#begin_month#,#end_month#,#kpi_1#,#kpi_2#,#kpi_3#,#kpi_4#,#kpi_5#,#kpi_6#,#over_all#,#operater#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="SupervisorRanking">
+		update etop5.dbo.tb_supervisor_monthly_ranking 
+		   set 	
+				dept_id=#dept_id#,
+				supervisor=#supervisor#,
+				begin_month=#begin_month#,
+				end_month=#end_month#,
+				kpi_1=#kpi_1#,
+				kpi_2=#kpi_2#,
+				kpi_3=#kpi_3#,
+				kpi_4=#kpi_4#,
+				kpi_5=#kpi_5#,
+				kpi_6=#kpi_6#,
+				over_all=#over_all#,
+				operater=#operater#,
+				update_date=getdate()
+		 where id = #id#
+	</update>
+	
+	<insert id="saveHeader" parameterClass="SupervisorRanking">
+  		insert into etop5.dbo.tb_supervisor_monthly_ranking_header (
+  			type,begin_month,end_month,header_1,header_2,header_3,header_4,header_5,header_6,operater,create_date,update_date
+  		) values (
+  			#type#,#begin_month#,#end_month#,#header_1#,#header_2#,#header_3#,#header_4#,#header_5#,#header_6#,#operater#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="updateHeader" parameterClass="SupervisorRanking">
+		update etop5.dbo.tb_supervisor_monthly_ranking_header 
+		   set 	
+				type=#type#,
+				begin_month=#begin_month#,
+				end_month=#end_month#,
+				header_1=#header_1#,
+				header_2=#header_2#,
+				header_3=#header_3#,
+				header_4=#header_4#,
+				header_5=#header_5#,
+				header_6=#header_6#,
+				operater=#operater#,
+				update_date=getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

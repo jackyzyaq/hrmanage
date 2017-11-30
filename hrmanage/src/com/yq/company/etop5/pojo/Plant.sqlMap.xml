@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.Plant">
+
+	<typeAlias alias="Plant" type="com.yq.company.etop5.pojo.Plant"/>
+  	
+  	<select id="findBySql" resultClass="Plant" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="Plant">
+  		insert into etop5.dbo.tb_plant (
+  			begin_year,plant,upload_uuid,state,type,operater,handler,level1,datepoint,ext_1,create_date,update_date
+  		) values (
+  			#begin_year#,#plant#,#upload_uuid#,#state#,#type#,#operater#,#handler#,#level1#,#datepoint#,#ext_1#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="Plant">
+		update etop5.dbo.tb_plant 
+		   set 	
+				begin_year = #begin_year#,
+				plant = #plant#,
+				upload_uuid = #upload_uuid#,
+				state = #state#,
+				type = #type#,
+				handler=#handler#,
+				level1=#level1#,
+				datepoint=#datepoint#,
+				ext_1=#ext_1#,
+				operater=#operater#,
+				update_date=getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

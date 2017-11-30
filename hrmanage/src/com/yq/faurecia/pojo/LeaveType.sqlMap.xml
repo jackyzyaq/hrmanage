@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.LeaveType">
+
+	<typeAlias alias="LeaveType" type="com.yq.faurecia.pojo.LeaveType"/>
+  	
+  	<select id="findById" resultClass="LeaveType" parameterClass="Integer" remapResults="true">
+  		 select 
+  		 	 id,type_code,type_name,state,remark,create_date,update_date
+		 from tb_leave_type t 
+  		 where id = #id# and state = 1
+  	</select>
+  	
+  	<select id="findByTypeCode" resultClass="LeaveType" parameterClass="String" remapResults="true">
+		 select 
+  		 	 id,type_code,type_name,state,remark,create_date,update_date
+		 from tb_leave_type t 
+  		 where type_code = #type_code# and state = 1
+  	</select>  	
+  	
+  	<select id="findBySql" resultClass="LeaveType" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="LeaveType">
+  		insert into tb_leave_type (
+  			type_code,type_name,state,remark,create_date,update_date
+  		) values (
+  			#type_code#,#type_name#,#state#,#remark#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<update id="update" parameterClass="LeaveType">
+		update tb_leave_type 
+		   set 	type_code = #type_code#,
+				type_name = #type_name#,
+				state = #state#,
+				remark = #remark#,
+				update_date = getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

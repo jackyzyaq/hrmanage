@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.authority.pojo.MenuInfo">
+
+	<typeAlias alias="MenuInfo" type="com.yq.authority.pojo.MenuInfo"/>
+  	
+  	<select id="findById" resultClass="MenuInfo" parameterClass="Integer" remapResults="true">
+  		 select id,
+		        parent_id,
+		        (select menu_code from tb_menu_info where id=t.parent_id) parent_menu_code,        
+		        (select menu_name from tb_menu_info where id=t.parent_id) parent_menu_name,
+		        menu_code,menu_name,url,url_param,create_date,update_date,description,state,is_menu
+		 from tb_menu_info t 
+  		 where id = #id# and state = 1
+  	</select>
+  	
+  	<select id="findByParentId" resultClass="MenuInfo" parameterClass="Integer" remapResults="true">
+		 select id,
+		        parent_id,
+		        (select menu_code from tb_menu_info where id=t.parent_id) parent_menu_code,        
+		        (select menu_name from tb_menu_info where id=t.parent_id) parent_menu_name,
+		        menu_code,menu_name,url,url_param,create_date,update_date,description,state,is_menu
+		 from tb_menu_info t 
+  		 where parent_id = #parent_id# and state = 1
+  	</select>
+  	
+  	<select id="findByMenuCode" resultClass="MenuInfo" parameterClass="String" remapResults="true">
+		 select id,
+		        parent_id,
+		        (select menu_code from tb_menu_info where id=t.parent_id) parent_menu_code,        
+		        (select menu_name from tb_menu_info where id=t.parent_id) parent_menu_name,
+		        menu_code,menu_name,url,url_param,create_date,update_date,description,state,is_menu 
+		 from tb_menu_info t 
+  		 where menu_code = #menu_code# and state = 1
+  	</select>  	
+  	
+  	<select id="findBySql" resultClass="MenuInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="MenuInfo">
+  		insert into tb_menu_info (
+  			parent_id,menu_code,menu_name,url,url_param,create_date,update_date,description,state,is_menu
+  		) values (
+  			#parent_id#,#menu_code#,#menu_name#,#url#,#url_param#,getdate(),getdate(),#description#,#state#,#is_menu#
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<insert id="saveMenuRole" parameterClass="java.util.Map">
+		insert into t_menu_role (menu_id,role_id)
+					     values (#menu_id#,#role_id#)  	
+	</insert>	
+	
+  	<update id="update" parameterClass="MenuInfo">
+		update tb_menu_info 
+		   set 	parent_id=#parent_id#,
+		   		menu_code=#menu_code#,
+		   		menu_name=#menu_name#,
+		   		url=#url#,
+		   		url_param=#url_param#,
+		   		update_date=getdate(),
+		   		description=#description#,
+		   		state = #state#,
+		   		is_menu = #is_menu#,
+		   		orderNum=#orderNum#
+		 where id = #id#
+	</update>	
+	
+  	<delete id="deleteById" parameterClass="Integer">
+  		delete from tb_menu_info where id = #id#
+  	</delete>
+  	
+  	<delete id="deleteByIds" parameterClass="String">
+  		delete from tb_menu_info where id in($ids$)
+  	</delete>
+  	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

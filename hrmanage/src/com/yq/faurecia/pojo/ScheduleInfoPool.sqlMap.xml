@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.ScheduleInfoPool">
+
+	<typeAlias alias="ScheduleInfoPool" type="com.yq.faurecia.pojo.ScheduleInfoPool"/>
+  	<select id="findBySql" resultClass="ScheduleInfoPool" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	<insert id="savePool" parameterClass="ScheduleInfoPool">
+  		insert into tb_schedule_info_pool (
+  			wo_number,dept_id,type,class_id,class_name,emp_id,begin_date,end_date,begin_time,end_time,hours,have_meals,meals,over_hour,remark,user_id,available,create_date,update_date
+  		) values (
+  			#wo_number#,#dept_id#,#type#,#class_id#,#class_name#,#emp_id#,#begin_date#,#end_date#,#begin_time#,#end_time#,#hours#,#have_meals#,#meals#,#over_hour#,#remark#,#user_id#,#available#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<update id="updatePool" parameterClass="ScheduleInfoPool">
+		update tb_schedule_info_pool 
+		   set 	
+		   		dept_id = #dept_id#,
+		   		emp_id = #emp_id#,
+		   		class_id = #class_id#,
+		   		class_name = #class_name#,
+		   		type = #type#,
+		   		begin_date = #begin_date#,
+		   		end_date = #end_date#,
+		   		begin_time = #begin_time#,
+				end_time = #end_time#,
+				hours = #hours#,
+				have_meals=#have_meals#,
+				meals = #meals#,
+				over_hour=#over_hour#,
+		   		remark = #remark#,
+		   		user_id = #user_id#,
+		   		available = #available#,
+				update_date = getdate()
+		 where id = #id#
+	</update>	
+	
+</sqlMap>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.ProjectInfo">
+
+	<typeAlias alias="ProjectInfo" type="com.yq.faurecia.pojo.ProjectInfo"/>
+  	
+  	<select id="findById" resultClass="ProjectInfo" parameterClass="Integer" remapResults="true">
+  		 select 
+  		 	 id,project_code,project_name,state,remark,create_date,update_date
+		 from tb_project_info t 
+  		 where id = #id# and state = 1
+  	</select>
+  	
+  	<select id="findByProjectCode" resultClass="ProjectInfo" parameterClass="String" remapResults="true">
+		 select 
+  		 	 id,project_code,project_name,state,remark,create_date,update_date
+		 from tb_project_info t 
+  		 where project_code = #project_code# and state = 1
+  	</select>  	
+  	
+  	<select id="findBySql" resultClass="ProjectInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="ProjectInfo">
+  		insert into tb_project_info (
+  			project_code,project_name,state,remark,create_date,update_date
+  		) values (
+  			#project_code#,#project_name#,#state#,#remark#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<update id="update" parameterClass="ProjectInfo">
+		update tb_project_info 
+		   set 	project_code = #project_code#,
+				project_name = #project_name#,
+				state = #state#,
+				remark = #remark#,
+				update_date = getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

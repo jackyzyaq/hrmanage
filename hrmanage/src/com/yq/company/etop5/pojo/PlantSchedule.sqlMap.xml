@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.PlantSchedule">
+
+	<typeAlias alias="PlantSchedule" type="com.yq.company.etop5.pojo.PlantSchedule"/>
+  	
+  	<select id="findBySql" resultClass="PlantSchedule" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="PlantSchedule">
+  		insert into etop5.dbo.tb_plant_schedule (
+  			begin_date,end_date,title,state,operater,create_date,update_date
+  		) values (
+  			#begin_date#,#end_date#,#title#,#state#,#operater#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="PlantSchedule">
+		update etop5.dbo.tb_plant_schedule 
+		   set 	
+				begin_date = #begin_date#,
+				end_date = #end_date#,
+				title = #title#,
+				state = #state#,
+				operater=#operater#,
+				update_date=getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

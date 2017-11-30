@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.GapInfo">
+
+	<typeAlias alias="GapInfo" type="com.yq.faurecia.pojo.GapInfo"/>
+  	
+  	<select id="findById" resultClass="GapInfo" parameterClass="Integer" remapResults="true">
+  		 select 
+  		 	 id,gap_code,gap_name,state,remark,create_date,update_date
+		 from tb_gap_info t 
+  		 where id = #id# and state = 1
+  	</select>
+  	
+  	<select id="findByGapCode" resultClass="GapInfo" parameterClass="String" remapResults="true">
+		 select 
+  		 	 id,gap_code,gap_name,state,remark,create_date,update_date
+		 from tb_gap_info t 
+  		 where gap_code = #gap_code# and state = 1
+  	</select>  	
+  	
+  	<select id="findBySql" resultClass="GapInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="GapInfo">
+  		insert into tb_gap_info (
+  			gap_code,gap_name,state,remark,create_date,update_date
+  		) values (
+  			#gap_code#,#gap_name#,#state#,#remark#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<update id="update" parameterClass="GapInfo">
+		update tb_gap_info 
+		   set 	gap_code = #gap_code#,
+				gap_name = #gap_name#,
+				state = #state#,
+				remark = #remark#,
+				update_date = getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

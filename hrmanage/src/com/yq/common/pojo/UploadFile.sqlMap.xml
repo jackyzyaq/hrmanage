@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.yq.common.pojo.UploadFile">
+	<typeAlias alias="UploadFile" type="com.yq.common.pojo.UploadFile"/>
+	
+	<select id="getUploadFileById" parameterClass="Long"  resultClass="UploadFile" remapResults="true">
+		select ID,UUID,FILETYPE,FILENAME,SIZE,ADDDATE,SOURCE,REMARK,EXT1,EXT2,EXT3
+		from tb_upload_files where ID=#value#
+	</select>
+	
+	<select id="getUploadFileByUUId" parameterClass="String"  resultClass="UploadFile" remapResults="true">
+		select ID,UUID,FILETYPE,FILENAME,SIZE,ADDDATE,SOURCE,REMARK,EXT1,EXT2,EXT3
+		from tb_upload_files where UUID=#value#
+	</select>	
+
+	<insert id="insert" parameterClass="UploadFile">
+		insert into tb_upload_files(UUID,FILETYPE,FILENAME,SIZE,ADDDATE,SOURCE,REMARK,EXT1,EXT2,EXT3) 
+					values(#uuid#,#fileType#,#fileName#,#size#,getdate(),#source#,#remark#,#ext1#,#ext2#,#ext3#)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>					
+	</insert>
+	<update id="update" parameterClass="UploadFile">
+		update tb_upload_files set UUID=#uuid#,FILETYPE = #fileType#, FILENAME =#fileName#, SIZE = #size#, ADDDATE = #addDate#,
+		SOURCE = #source#, REMARK = #remark#,EXT1 = #ext1#, EXT2 = #ext2#, EXT3 = #ext3# where ID = #id#
+	</update>
+   <delete id="deleteById" parameterClass="Long">
+		delete from tb_upload_files where ID = #value#
+	</delete>
+</sqlMap>

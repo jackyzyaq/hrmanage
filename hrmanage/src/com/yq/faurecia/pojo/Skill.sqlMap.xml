@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.Skill">
+
+	<typeAlias alias="Skill" type="com.yq.faurecia.pojo.Skill"/>
+  	
+  	<select id="findBySql" resultClass="Skill" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="Skill">
+  		insert into tb_employee_skill (
+  			emp_id,type_name,skill,state,create_usr,update_usr,create_date,update_date
+  		) values (
+  			#emp_id#,#type_name#,#skill#,#state#,#create_usr#,#update_usr#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<update id="update" parameterClass="Skill">
+		update tb_employee_skill 
+		   set 	
+			emp_id=#emp_id#,
+			type_name=#type_name#,
+			skill=#skill#,
+			state=#state#,
+			create_usr=#create_usr#,
+			update_usr=#update_usr#,
+			update_date=getdate()		
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

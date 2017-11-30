@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.OverTimeInfo">
+
+	<typeAlias alias="OverTimeInfo" type="com.yq.faurecia.pojo.OverTimeInfo"/>
+  	<select id="findById" resultClass="OverTimeInfo" parameterClass="Integer" remapResults="true">
+  		 select 
+  		 	 id,wo_number,flow_id,dept_id,emp_id,type,begin_date,end_date,over_hour,day_or_hour,year,remark,user_id,available,check_emp_id,check_state,check_state_date,check_remark,status,next_check_emp_id,create_date,update_date
+		 from tb_overtime_info t 
+  		 where id = #id#
+  	</select>
+  	
+  	<select id="findBySql" resultClass="OverTimeInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="OverTimeInfo">
+  		insert into tb_overtime_info (
+  			wo_number,flow_id,dept_id,emp_id,type,begin_date,end_date,over_hour,day_or_hour,year,remark,user_id,available,check_emp_id,check_state,check_state_date,check_remark,status,next_check_emp_id,create_date,update_date
+  		) values (
+  			#wo_number#,#flow_id#,#dept_id#,#emp_id#,#type#,#begin_date#,#end_date#,#over_hour#,#day_or_hour#,#year#,#remark#,#user_id#,#available#,#check_emp_id#,#check_state#,#check_state_date#,#check_remark#,#status#,#next_check_emp_id#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<update id="update" parameterClass="OverTimeInfo">
+		update tb_overtime_info 
+		   set 	
+		   		flow_id = #flow_id#,
+		   		dept_id = #dept_id#,
+		   		emp_id = #emp_id#,
+		   		type = #type#,
+		   		begin_date = #begin_date#,
+		   		end_date = #end_date#,
+		   		over_hour = #over_hour#,
+		   		day_or_hour = #day_or_hour#,
+		   		year = #year#,
+		   		remark = #remark#,
+		   		user_id = #user_id#,
+		   		available = #available#,
+		   		check_emp_id = #check_emp_id#,
+		   		check_state = #check_state#,
+		   		check_state_date = #check_state_date#,
+		   		check_remark = #check_remark#,
+		   		status = #status#,
+		   		next_check_emp_id = #next_check_emp_id#,
+				update_date = getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>
+	
+	
+	<typeAlias alias="OverTimeInfoHistory" type="com.yq.faurecia.pojo.OverTimeInfoHistory"/>
+  	<insert id="saveHistory" parameterClass="OverTimeInfoHistory">
+  		insert into tb_overtime_info_history (
+  			overtime_info_id,flow_id,dept_id,emp_id,type,begin_date,end_date,over_hour,day_or_hour,year,remark,user_id,available,check_emp_id,check_state,check_state_date,check_remark,status,next_check_emp_id,create_date,update_date
+  		) values (
+  			#overtime_info_id#,#flow_id#,#dept_id#,#emp_id#,#type#,#begin_date#,#end_date#,#over_hour#,#day_or_hour#,#year#,#remark#,#user_id#,#available#,#check_emp_id#,#check_state#,#check_state_date#,#check_remark#,#status#,#next_check_emp_id#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>	
+</sqlMap>

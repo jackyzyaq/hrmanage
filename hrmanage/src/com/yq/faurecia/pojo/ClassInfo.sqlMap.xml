@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.ClassInfo">
+
+	<typeAlias alias="ClassInfo" type="com.yq.faurecia.pojo.ClassInfo"/>
+  	
+  	<select id="findBySql" resultClass="ClassInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="ClassInfo">
+  		insert into tb_class_info (
+  			class_code,class_name,begin_time,end_time,hours,meals,have_meals,over_hour,state,remark,create_date,update_date
+  		) values (
+  			#class_code#,#class_name#,#begin_time#,#end_time#,#hours#,#meals#,#have_meals#,#over_hour#,#state#,#remark#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="ClassInfo">
+		update tb_class_info 
+		   set 	
+				class_code = #class_code#,
+				class_name = #class_name#,
+				hours = #hours#,
+				meals = #meals#,
+				begin_time = #begin_time#,
+				end_time = #end_time#,
+				have_meals = #have_meals#,
+				over_hour = #over_hour#,
+				state = #state#,
+				remark = #remark#,
+				update_date = getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

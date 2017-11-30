@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.TimeSheet">
+	<typeAlias alias="TimeSheet" type="com.yq.faurecia.pojo.TimeSheet"/>
+  	<select id="findBySql" resultClass="TimeSheet" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="TimeSheet">
+  		insert into tb_time_sheet (
+  			emp_id,card_id,inner_date,type,ip,source,operater,create_date
+  		) values (
+  			#emp_id#,#card_id#,#inner_date#,#type#,#ip#,#source#,#operater#,getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	<update id="delTS" parameterClass="TimeSheet">
+  		delete from tb_time_sheet where id in($ids$)
+	</update>	
+	
+	<typeAlias alias="TimeSheetDetail" type="com.yq.faurecia.pojo.TimeSheetDetail"/>
+  	<select id="findDetailBySql" resultClass="TimeSheetDetail" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="saveDetail" parameterClass="TimeSheetDetail">
+  		insert into tb_time_sheet_detail (
+  			emp_id,class_date,class_name,class_begin_date,class_end_date,ts_begin_date,ts_end_date,arrive_work_hours,breaktime_type,breaktime_begin_date,breaktime_end_date,absence_hours,ot1_hours,ot2_hours,ot3_hours,deficit_hours,shift1_number,shift2_number,abnormal_cause,ts_number,tb_01,tb_02,class_type,should_work_hours,over_hour,shift3_number,hour50,create_date,update_date
+  		) values (
+  			#emp_id#,#class_date#,#class_name#,#class_begin_date#,#class_end_date#,#ts_begin_date#,#ts_end_date#,#arrive_work_hours#,#breaktime_type#,#breaktime_begin_date#,#breaktime_end_date#,#absence_hours#,#ot1_hours#,#ot2_hours#,#ot3_hours#,#deficit_hours#,#shift1_number#,#shift2_number#,#abnormal_cause#,#ts_number#,#tb_01#,#tb_02#,#class_type#,#should_work_hours#,#over_hour#,#shift3_number#,#hour50#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+	<update id="delDetail" parameterClass="TimeSheetDetail">
+  		delete from tb_time_sheet_detail where emp_id=#emp_id# and class_date =#class_date#
+	</update>	
+</sqlMap>

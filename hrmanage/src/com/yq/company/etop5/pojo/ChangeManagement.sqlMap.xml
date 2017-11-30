@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.ChangeManagement">
+
+	<typeAlias alias="ChangeManagement" type="com.yq.company.etop5.pojo.ChangeManagement"/>
+  	<select id="findBySql" resultClass="ChangeManagement" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="ChangeManagement">
+  		insert into etop5.dbo.tb_change_management (
+  			report_date,dept_id,emp_id,type,ext_1,ext_2,ext_3,ext_4,ext_5_1,ext_5_1_date,ext_5_2,ext_5_2_date,ext_5_3,ext_5_3_date,ext_5_4,ext_5_4_date,ext_5_5,ext_5_5_date,state,operater,create_date,update_date
+  		) values (
+  			#report_date#,#dept_id#,#emp_id#,#type#,#ext_1#,#ext_2#,#ext_3#,#ext_4#,#ext_5_1#,#ext_5_1_date#,#ext_5_2#,#ext_5_2_date#,#ext_5_3#,#ext_5_3_date#,#ext_5_4#,#ext_5_4_date#,#ext_5_5#,#ext_5_5_date#,#state#,#operater#,getdate(),getdate()  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="ChangeManagement">
+		update etop5.dbo.tb_change_management 
+		   set 	
+		   		report_date=#report_date#,
+				dept_id=#dept_id#,
+				emp_id=#emp_id#,
+				type=#type#,
+				ext_1=#ext_1#,
+				ext_2=#ext_2#,
+				ext_3=#ext_3#,
+				ext_4=#ext_4#,
+				ext_5_1=#ext_5_1#,
+				ext_5_1_date=#ext_5_1_date#,
+				ext_5_2=#ext_5_2#,
+				ext_5_2_date=#ext_5_2_date#,
+				ext_5_3=#ext_5_3#,
+				ext_5_3_date=#ext_5_3_date#,
+				ext_5_4=#ext_5_4#,
+				ext_5_4_date=#ext_5_4_date#,
+				ext_5_5=#ext_5_5#,
+				ext_5_5_date=#ext_5_5_date#,
+				state=#state#,
+				operater=#operater#,
+				update_date=getdate()
+		 where id = #id#
+	</update>
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

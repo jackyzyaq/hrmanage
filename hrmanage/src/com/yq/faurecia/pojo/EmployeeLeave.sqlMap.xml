@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.EmployeeLeave">
+
+	<typeAlias alias="EmployeeLeave" type="com.yq.faurecia.pojo.EmployeeLeave"/>
+  	
+  	<select id="findBySql" resultClass="EmployeeLeave" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="EmployeeLeave">
+  		insert into tb_employee_leave (
+  			emp_id,year,state,annualDays,companyDays,totalDays,create_date,update_date
+  		) values (
+  			#emp_id#,#year#,#state#,#annualDays#,#companyDays#,#totalDays#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="EmployeeLeave">
+		update tb_employee_leave 
+		   set 	emp_id = #emp_id#,
+				year = #year#,
+				annualDays = #annualDays#,
+				companyDays = #companyDays#,
+				totalDays = #totalDays#,
+				state = #state#,
+				update_date = getdate()
+		 where id = #id#
+	</update>
+	
+  	<update id="updateByEmpIdAndYear" parameterClass="EmployeeLeave">
+		update tb_employee_leave 
+		   set 	
+				annualDays = #annualDays#,
+				companyDays = #companyDays#,
+				totalDays = #totalDays#,
+				state = #state#,
+				update_date = getdate()
+		 where emp_id = #emp_id# and year = #year#
+	</update>		
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

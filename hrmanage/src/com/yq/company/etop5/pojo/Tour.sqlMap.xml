@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.Tour">
+
+	<typeAlias alias="Tour" type="com.yq.company.etop5.pojo.Tour"/>
+  	<select id="findBySql" resultClass="Tour" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="Tour">
+  		insert into etop5.dbo.tb_tour_info (
+  			dept_id,time,zone,input_kpi,criteria_standard_situation,linked_output_kpi,visual_tools,check_current_situation,up_rule_y,up_rule_o,up_rule_r,reaction_rule_y,reaction_rule_o,reaction_rule_r,ext_1,ext_2,ext_3,ext_4,ext_5,ext_6,ext_7,ext_8,ext_9,ext_10,operater,
+  			dept_id_1,emp_id_1,expect_time_1,dept_id_2,emp_id_2,expect_time_2,dept_id_3,emp_id_3,expect_time_3,state,
+  			create_date,update_date
+  		) values (
+  			#dept_id#,#time#,#zone#,#input_kpi#,#criteria_standard_situation#,#linked_output_kpi#,#visual_tools#,#check_current_situation#,#up_rule_y#,#up_rule_o#,#up_rule_r#,#reaction_rule_y#,#reaction_rule_o#,#reaction_rule_r#,#ext_1#,#ext_2#,#ext_3#,#ext_4#,#ext_5#,#ext_6#,#ext_7#,#ext_8#,#ext_9#,#ext_10#,#operater#,
+  			#dept_id_1#,#emp_id_1#,#expect_time_1#,#dept_id_2#,#emp_id_2#,#expect_time_2#,#dept_id_3#,#emp_id_3#,#expect_time_3#,#state#,
+  			getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="Tour">
+		update etop5.dbo.tb_tour_info 
+		   set 	
+		   		dept_id=#dept_id#,
+				time=#time#,
+				zone=#zone#,
+				input_kpi=#input_kpi#,
+				criteria_standard_situation=#criteria_standard_situation#,
+				linked_output_kpi=#linked_output_kpi#,
+				visual_tools=#visual_tools#,
+				check_current_situation=#check_current_situation#,
+				up_rule_y=#up_rule_y#,
+				up_rule_o=#up_rule_o#,
+				up_rule_r=#up_rule_r#,
+				reaction_rule_y=#reaction_rule_y#,
+				reaction_rule_o=#reaction_rule_o#,
+				reaction_rule_r=#reaction_rule_r#,
+				dept_id_1=#dept_id_1#,
+				emp_id_1=#emp_id_1#,
+				expect_time_1=#expect_time_1#,
+				dept_id_2=#dept_id_2#,
+				emp_id_2=#emp_id_2#,
+				expect_time_2=#expect_time_2#,
+				dept_id_3=#dept_id_3#,
+				emp_id_3=#emp_id_3#,
+				expect_time_3=#expect_time_3#,
+				state=#state#,
+				ext_1=#ext_1#,
+				ext_2=#ext_2#,
+				ext_3=#ext_3#,
+				ext_4=#ext_4#,
+				ext_5=#ext_5#,
+				ext_6=#ext_6#,
+				ext_7=#ext_7#,
+				ext_8=#ext_8#,
+				ext_9=#ext_9#,
+				ext_10=#ext_10#,
+				operater=#operater#,
+				update_date=getdate()
+		 where id = #id#
+	</update>
+	
+  	<insert id="saveMap" parameterClass="Tour">
+  		insert into etop5.dbo.tb_tour_map (
+  			dept_id,map_upload,create_date,update_date
+  		) values (
+  			#dept_id#,#map_upload#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="updateMap" parameterClass="Tour">
+		update etop5.dbo.tb_tour_map 
+		   set 	
+				map_upload=#map_upload#,
+				update_date=getdate()
+		 where dept_id = #dept_id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

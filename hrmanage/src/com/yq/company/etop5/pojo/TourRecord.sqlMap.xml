@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.TourRecord">
+
+	<typeAlias alias="TourRecord" type="com.yq.company.etop5.pojo.TourRecord"/>
+  	<select id="findBySql" resultClass="TourRecord" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="TourRecord">
+  		insert into etop5.dbo.tb_tour_record (
+  			tour_info_id,report_date,number,dept_name,emp_name,status,status_date,respones,ext_1,ext_2,ext_3,ext_4,ext_5,ext_6,ext_7,ext_8,ext_9,ext_10,create_date,update_date
+  		) values (
+  			#tour_info_id#,#report_date#,#number#,#dept_name#,#emp_name#,#status#,#status_date#,#respones#,#ext_1#,#ext_2#,#ext_3#,#ext_4#,#ext_5#,#ext_6#,#ext_7#,#ext_8#,#ext_9#,#ext_10#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="TourRecord">
+		update etop5.dbo.tb_tour_record 
+		   set 	
+				tour_info_id=#tour_info_id#,
+				report_date=#report_date#,
+				number=#number#,
+				dept_name=#dept_name#,
+				emp_name=#emp_name#,
+				status=#status#,
+				status_date=#status_date#,
+				respones=#respones#,
+				ext_1=#ext_1#,
+				ext_2=#ext_2#,
+				ext_3=#ext_3#,
+				ext_4=#ext_4#,
+				ext_5=#ext_5#,
+				ext_6=#ext_6#,
+				ext_7=#ext_7#,
+				ext_8=#ext_8#,
+				ext_9=#ext_9#,
+				ext_10=#ext_10#,
+				update_date=getdate(),
+		 where id = #id#
+	</update>
+	
+	<insert id="save24" parameterClass="TourRecord">
+  		insert into etop5.dbo.tb_tour_24hour (
+  			tour_info_id,report_date,unit,data24,ext_1,ext_2,ext_3,ext_4,ext_5,operater,create_date,update_date
+  		) values (
+  			#tour_info_id#,#report_date#,#unit#,#data24#,#ext_1#,#ext_2#,#ext_3#,#ext_4#,#ext_5#,#operater#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update24" parameterClass="TourRecord">
+		update etop5.dbo.tb_tour_24hour 
+		   set 	
+				tour_info_id=#tour_info_id#,
+				report_date=#report_date#,
+				unit=#unit#,
+				data24=#data24#,
+				operater=#operater#,
+				ext_1=#ext_1#,
+				ext_2=#ext_2#,
+				ext_3=#ext_3#,
+				ext_4=#ext_4#,
+				ext_5=#ext_5#,
+				update_date=getdate(),
+		 where tour_info_id = #tour_info_id# and report_date = #report_date# 
+	</update>
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

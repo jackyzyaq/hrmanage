@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.authority.pojo.ActionInfo">
+
+	<typeAlias alias="ActionInfo" type="com.yq.authority.pojo.ActionInfo"/>
+  	
+  	<select id="findById" resultClass="ActionInfo" parameterClass="Integer" remapResults="true">
+		select id,action_name,action_code,
+		       action_menu_id,       
+		       (select menu_name from tb_menu_info where id=t.action_menu_id) action_menu_name,       
+		       (select menu_code from tb_menu_info where id=t.action_menu_id) action_menu_code,
+		       viewmode,create_date,update_date
+		  from tb_action_info t
+  		 where id = #id# and viewmode = 1
+  	</select>
+  	
+  	<select id="findByActionCode" resultClass="ActionInfo" parameterClass="String" remapResults="true">
+		select id,action_name,action_code,
+		       action_menu_id,       
+		       (select menu_name from tb_menu_info where id=t.action_menu_id) action_menu_name,       
+		       (select menu_code from tb_menu_info where id=t.action_menu_id) action_menu_code,
+		       viewmode,create_date,update_date
+		  from tb_action_info t
+  		 where action_code = #action_code# and viewmode = 1
+  	</select>
+  	
+  	<select id="findByMenuIds" resultClass="ActionInfo" parameterClass="String" remapResults="true">
+		select id,action_name,action_code,
+		       action_menu_id,       
+		       (select menu_name from tb_menu_info where id=t.action_menu_id) action_menu_name,       
+		       (select menu_code from tb_menu_info where id=t.action_menu_id) action_menu_code,
+		       viewmode,create_date,update_date
+		  from tb_action_info t
+		 where t.action_menu_id in($menuIds$) and viewmode = 1
+  	</select>  	
+  	
+  	<select id="findBySql" resultClass="ActionInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="ActionInfo">
+  		insert into tb_action_info (
+  			action_name,action_code,action_menu_id,viewmode,create_date,update_date
+  		) values (
+  			#action_name#,#action_code#,#action_menu_id#,#viewmode#,getdate(),getdate()
+  		)
+	</insert>
+	
+  	<insert id="saveActionRole" parameterClass="java.util.Map">
+		insert into tb_action_role (action_id,role_id)
+					     values (#action_id#,#role_id#)  	
+	</insert>	
+	
+  	<update id="update" parameterClass="ActionInfo">
+		update tb_action_info 
+		   set action_code=#action_code#,action_name=#action_name#,action_menu_id=#action_menu_id#,viewmode=#viewmode#,update_date=getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	
+	
+  	<delete id="deleteById" parameterClass="Integer">
+  		delete from tb_action_info where id = #id#
+  	</delete>
+  	
+  	<delete id="deleteByIds" parameterClass="String">
+  		delete from tb_action_info where id in($ids$)
+  	</delete>
+  	
+</sqlMap>

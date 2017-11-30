@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.FlowInfo">
+
+	<typeAlias alias="FlowInfo" type="com.yq.faurecia.pojo.FlowInfo"/>
+  	
+  	<select id="findById" resultClass="FlowInfo" parameterClass="Integer" remapResults="true">
+  		 select 
+  		 	 id,flow_code,flow_name,state,days_down,days_up,step_info,remark,create_date,update_date
+		 from tb_flow_info t 
+  		 where id = #id#
+  	</select>
+  	
+  	<select id="findByFlowCode" resultClass="FlowInfo" parameterClass="String" remapResults="true">
+		 select 
+  		 	 id,flow_code,flow_name,state,days_down,days_up,step_info,remark,create_date,update_date
+		 from tb_flow_info t 
+  		 where flow_code = #flow_code#
+  	</select>  	
+  	
+  	<select id="findBySql" resultClass="FlowInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="FlowInfo">
+  		insert into tb_flow_info (
+  			flow_code,flow_name,state,days_down,days_up,step_info,remark,create_date,update_date
+  		) values (
+  			#flow_code#,#flow_name#,#state#,#days_down#,#days_up#,#step_info#,#remark#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<update id="update" parameterClass="FlowInfo">
+		update tb_flow_info 
+		   set 	flow_code = #flow_code#,
+		   		flow_name = #flow_name#,
+				step_info = #step_info#,
+				state = #state#,
+				days_down = #days_down#,
+				days_up = #days_up#,
+				remark = #remark#,
+				update_date = getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

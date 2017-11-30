@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings
+			cacheModelsEnabled="true"
+			enhancementEnabled="true"
+			lazyLoadingEnabled="true"
+			maxRequests="20"
+			maxSessions="10"
+			maxTransactions="50"
+			useStatementNamespaces="true"
+			/>
+	
+		<sqlMap resource="com/yq/common/pojo/Sequence.sqlMap.xml"/>
+		<sqlMap resource="com/yq/common/pojo/UploadFile.sqlMap.xml"/>
+		
+		<sqlMap resource="com/yq/authority/pojo/RoleInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/authority/pojo/MenuInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/authority/pojo/ActionInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/authority/pojo/UserInfo.sqlMap.xml"/>
+		
+		<sqlMap resource="com/yq/faurecia/pojo/DepartmentInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/EmployeeInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/EmployeeCard.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/EmployeeLeave.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/PositionInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/ProjectInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/GapInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/AnnualLeave.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/HrStatus.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/LeaveType.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/NationalHoliday.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/ClassInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/FlowInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/OverTimeInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/BreakTimeInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/ScheduleInfo.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/ScheduleInfoPool.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/FlowStep.sqlMap.xml"/>
+		
+		<sqlMap resource="com/yq/faurecia/pojo/TimeSheet.sqlMap.xml"/>
+		<sqlMap resource="com/yq/faurecia/pojo/Skill.sqlMap.xml"/>
+		
+		<sqlMap resource="com/yq/common/pojo/OperationRecord.sqlMap.xml"/>
+		<!-- *************************** 	ETOP5    ********************************** -->
+		<sqlMap resource="com/yq/company/etop5/pojo/PipdData.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/SupervisorRanking.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/AuditRanking.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/SupplierRanking.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/Plant.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/PlantSchedule.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/PipdReport.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/PipdPrioritiesManagement.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/QRCIData.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/QRCIDepartmentData.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/PlantKPI.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/DepartmentKPI.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/GapKPI.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/Tour.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/TourRecord.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/ChangeManagement.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/ManagementSchedule.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/KPIType.sqlMap.xml"/>
+		<sqlMap resource="com/yq/company/etop5/pojo/QRCILineData.sqlMap.xml"/>
+</sqlMapConfig>

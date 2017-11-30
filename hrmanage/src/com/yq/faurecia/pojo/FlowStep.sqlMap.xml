@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.FlowStep">
+
+	<typeAlias alias="FlowStep" type="com.yq.faurecia.pojo.FlowStep"/>
+  	
+  	<select id="findBySql" resultClass="FlowStep" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="FlowStep">
+  		insert into tb_flow_step (
+  			flow_id,handle_id,state,state_date,emp_id,emp_name,remark,create_date
+  		) values (
+  			#flow_id#,#handle_id#,#state#,#state_date#,#emp_id#,#emp_name#,#remark#,getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+</sqlMap>

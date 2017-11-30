@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.QRCIDepartmentData">
+
+	<typeAlias alias="QRCIDepartmentData" type="com.yq.company.etop5.pojo.QRCIDepartmentData"/>
+  	
+  	<select id="findBySql" resultClass="QRCIDepartmentData" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="QRCIDepartmentData">
+  		insert into etop5.dbo.tb_qrci_department_data (
+  			qrci_type,open_date,problem_descripion,yesterday_task_to_be_checked,task_for_next_day_future,respensible,d3_24_hour,d6_10_day,d8_60_day,pfmea,cp,lls,department_manager,lls1,lls_transversalization,lls_daily_tracking_30_days,lls1_pic,lls_transversalization_pic,lls_daily_tracking_30_days_pic,state,operater,create_date,update_date
+  		) values (
+  		#qrci_type#,#open_date#,#problem_descripion#,#yesterday_task_to_be_checked#,#task_for_next_day_future#,#respensible#,#d3_24_hour#,#d6_10_day#,#d8_60_day#,#pfmea#,#cp#,#lls#,#department_manager#,#lls1#,#lls_transversalization#,#lls_daily_tracking_30_days#,#lls1_pic#,#lls_transversalization_pic#,#lls_daily_tracking_30_days_pic#,#state#,#operater#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="QRCIDepartmentData">
+		update etop5.dbo.tb_qrci_department_data 
+		   set 	
+				qrci_type=#qrci_type#,
+				open_date=#open_date#,
+				problem_descripion=#problem_descripion#,
+				yesterday_task_to_be_checked=#yesterday_task_to_be_checked#,
+				task_for_next_day_future=#task_for_next_day_future#,
+				respensible=#respensible#,
+				d3_24_hour=#d3_24_hour#,
+				d6_10_day=#d6_10_day#,
+				d8_60_day=#d8_60_day#,
+				pfmea=#pfmea#,
+				cp=#cp#,
+				lls=#lls#,
+				department_manager=#department_manager#,
+				lls1=#lls1#,
+				lls_transversalization=#lls_transversalization#,
+				lls_daily_tracking_30_days=#lls_daily_tracking_30_days#,
+				lls1_pic=#lls1_pic#,
+				lls_transversalization_pic=#lls_transversalization_pic#,
+				lls_daily_tracking_30_days_pic=#lls_daily_tracking_30_days_pic#,
+				state=#state#,
+				operater=#operater#,
+				update_date=getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>
+	
+	
+	<!--   history  -->
+	<insert id="saveHistory" parameterClass="QRCIDepartmentData">
+  		insert into etop5.dbo.tb_qrci_department_data_history (
+  			qrci_type,yesterday_task_to_be_checked,create_date
+  		) values (
+  			#qrci_type#,#yesterday_task_to_be_checked#,getdate()
+  		)
+	</insert>	  	
+</sqlMap>

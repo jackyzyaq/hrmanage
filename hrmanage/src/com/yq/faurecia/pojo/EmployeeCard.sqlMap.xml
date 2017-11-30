@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.EmployeeCard">
+
+	<typeAlias alias="EmployeeCard" type="com.yq.faurecia.pojo.EmployeeCard"/>
+  	
+  	<select id="findBySql" resultClass="EmployeeCard" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="EmployeeCard">
+  		insert into tb_employee_card (
+  			emp_id,card,state,remark,create_date,update_date
+  		) values (
+  			#emp_id#,#card#,#state#,#remark#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="EmployeeCard">
+		update tb_employee_card 
+		   set 	emp_id = #emp_id#,
+				card = #card#,
+				state = #state#,
+				remark = #remark#,
+				update_date = getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.EmployeeInfo">
+
+	<typeAlias alias="EmployeeInfo" type="com.yq.faurecia.pojo.EmployeeInfo"/>
+  	
+  	<select id="findById" resultClass="EmployeeInfo" parameterClass="Integer" remapResults="true">
+  		 select 
+  		 	id,emp_code,zh_name,en_name,type,
+			dept_id,(select dept_name from tb_department_info where id=dept_id) dept_name,
+			position_id,
+			birthday,photo,phone,mobile,education,college,
+  		 	profession,graduation_date,try_month,try_state,state,begin_date,end_date,create_date,update_date,
+  		 	emp01,emp02,emp03,emp04,emp05,emp06,emp07,emp08,emp09,emp10,emp11,emp12,emp13,emp14,emp15,
+  		 	labor_type,project_id,gap_id,hr_status_id,is_login,position_seniority,contract_type,age,residence,address,marry_state,emp16,emp17,emp18,emp19,emp20,emp21,emp22,emp23,pims
+		 from tb_employee_info t 
+  		 where id = #id# and state = 1
+  	</select>
+  	
+  	<select id="findByEmpCode" resultClass="EmployeeInfo" parameterClass="String" remapResults="true">
+		 select 
+		 	id,emp_code,zh_name,en_name,type,dept_id,position_id,birthday,photo,phone,mobile,education,college,
+  		 	profession,graduation_date,try_month,try_state,state,begin_date,end_date,create_date,update_date,
+  		 	emp01,emp02,emp03,emp04,emp05,emp06,emp07,emp08,emp09,emp10,emp11,emp12,emp13,emp14,emp15,
+  		 	labor_type,project_id,gap_id,hr_status_id,is_login,position_seniority,contract_type,age,residence,address,marry_state,emp16,emp17,emp18,emp19,emp20,emp21,emp22,emp23,pims
+		 from tb_employee_info t 
+  		 where emp_code = #emp_code# and state = 1
+  	</select>  	
+  	
+  	<select id="findBySql" resultClass="EmployeeInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="EmployeeInfo">
+  		insert into tb_employee_info (
+  			id,emp_code,zh_name,en_name,type,dept_id,position_id,birthday,photo,phone,mobile,education,college,
+  		 	profession,graduation_date,try_month,try_state,state,begin_date,end_date,create_date,update_date,
+  		 	emp01,emp02,emp03,emp04,emp05,emp06,emp07,emp08,emp09,emp10,emp11,emp12,emp13,emp14,emp15,labor_type,project_id,gap_id,hr_status_id,photo_upload_uuid,is_login,
+  		 	position_seniority,contract_type,age,residence,address,marry_state,emp16,emp17,emp18,emp19,emp20,emp21,emp22,emp23,pims
+  		) values (
+  			#id#,#emp_code#,#zh_name#,#en_name#,#type#,#dept_id#,#position_id#,#birthday#,#photo#,#phone#,#mobile#,#education#,#college#,
+  			#profession#,#graduation_date#,#try_month#,#try_state#,#state#,#begin_date#,#end_date#,getdate(),getdate(),
+  			#emp01#,#emp02#,#emp03#,#emp04#,#emp05#,#emp06#,#emp07#,#emp08#,#emp09#,#emp10#,#emp11#,#emp12#,#emp13#,#emp14#,#emp15#,#labor_type#,#project_id#,#gap_id#,#hr_status_id#,#photo_upload_uuid#,#is_login#,
+  			#position_seniority#,#contract_type#,#age#,#residence#,#address#,#marry_state#,#emp16#,#emp17#,#emp18#,#emp19#,#emp20#,#emp21#,#emp22#,#emp23#,#pims#
+  		)
+<!--   		<selectKey resultClass="int" type="post" keyProperty="id" >    -->
+<!--         	select @@IDENTITY as value    -->
+<!--     	</selectKey> -->
+	</insert>
+	
+  	<update id="update" parameterClass="EmployeeInfo">
+		update tb_employee_info 
+		   set 	emp_code = #emp_code#,
+				zh_name = #zh_name#,
+				en_name = #en_name#,
+				type = #type#,
+				dept_id = #dept_id#,
+				position_id = #position_id#,
+				birthday = #birthday#,
+				photo = #photo#,
+				phone = #phone#,
+				mobile = #mobile#,
+				education = #education#,
+				college = #college#,
+				profession = #profession#,
+				graduation_date = #graduation_date#,
+				try_month = #try_month#,
+				try_state = #try_state#,
+				state = #state#,
+				begin_date = #begin_date#,
+				end_date = #end_date#,
+				update_date = getdate(),
+				emp01 = #emp01#,
+				emp02 = #emp02#,
+				emp03 = #emp03#,
+				emp04 = #emp04#,
+				emp05 = #emp05#,
+				emp06 = #emp06#,
+				emp07 = #emp07#,
+				emp08 = #emp08#,
+				emp09 = #emp09#,
+				emp10 = #emp10#,
+				emp11 = #emp11#,
+				emp12 = #emp12#,
+				emp13 = #emp13#,
+				emp14 = #emp14#,
+				emp15 = #emp15#,
+				labor_type = #labor_type#,
+				project_id = #project_id#,
+				gap_id = #gap_id#,
+				hr_status_id = #hr_status_id#,
+				photo_upload_uuid = #photo_upload_uuid#,
+				is_login=#is_login#,
+				position_seniority =#position_seniority#,
+				contract_type =#contract_type#,
+				age =#age#,
+				residence =#residence#,
+				address =#address#,
+				marry_state =#marry_state#,
+				emp16 =#emp16#,
+				emp17 =#emp17#,
+				emp18 =#emp18#,
+				emp19 =#emp19#,
+				emp20 =#emp20#,
+				emp21 =#emp21#,
+				emp22 =#emp22#,
+				emp23 =#emp23#,
+				pims =#pims#
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>
+	
+	<!-- ********************************************************************************** -->
+	<typeAlias alias="EmployeeInfoHistory" type="com.yq.faurecia.pojo.EmployeeInfoHistory"/>
+	<insert id="saveHistory" parameterClass="EmployeeInfoHistory">
+  		insert into tb_employee_info_history (
+  			emp_id,emp_code,zh_name,en_name,type,dept_id,position_id,birthday,photo,phone,mobile,education,college,
+  		 	profession,graduation_date,try_month,try_state,state,begin_date,end_date,create_date,update_date,
+  		 	emp01,emp02,emp03,emp04,emp05,emp06,emp07,emp08,emp09,emp10,emp11,emp12,emp13,emp14,emp15,labor_type,
+  		 	project_id,gap_id,hr_status_id,photo_upload_uuid,is_login,
+  		 	position_seniority,contract_type,age,residence,address,marry_state,emp16,emp17,emp18,emp19,emp20,emp21,emp22,emp23,pims,history_type
+  		) values (
+  			#emp_id#,#emp_code#,#zh_name#,#en_name#,#type#,#dept_id#,#position_id#,#birthday#,#photo#,#phone#,#mobile#,#education#,#college#,
+  			#profession#,#graduation_date#,#try_month#,#try_state#,#state#,#begin_date#,#end_date#,getdate(),getdate(),
+  			#emp01#,#emp02#,#emp03#,#emp04#,#emp05#,#emp06#,#emp07#,#emp08#,#emp09#,#emp10#,#emp11#,#emp12#,#emp13#,#emp14#,#emp15#,#labor_type#,
+  			#project_id#,#gap_id#,#hr_status_id#,#photo_upload_uuid#,#is_login#,
+  			#position_seniority#,#contract_type#,#age#,#residence#,#address#,#marry_state#,#emp16#,#emp17#,#emp18#,#emp19#,#emp20#,#emp21#,#emp22#,#emp23#,#pims#,#history_type#
+  		)
+<!--   		<selectKey resultClass="int" type="post" keyProperty="id" >    -->
+<!--         	select @@IDENTITY as value    -->
+<!--     	</selectKey> -->
+	</insert>
+	
+	<insert id="saveHistoryChange" parameterClass="EmployeeInfoHistory">
+  		insert into tb_employee_info_history_change (
+  			emp_id,before_change,after_change,history_type,create_date
+  		) values (
+  			#emp_id#,#before_change#,#after_change#,#history_type#,#create_date#
+  		)
+<!--   		<selectKey resultClass="int" type="post" keyProperty="id" >    -->
+<!--         	select @@IDENTITY as value    -->
+<!--     	</selectKey> -->
+	</insert>	
+	
+	<select id="findHistoryBySql" resultClass="EmployeeInfoHistory" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>	  	
+</sqlMap>

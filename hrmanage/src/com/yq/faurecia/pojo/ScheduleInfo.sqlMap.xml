@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.ScheduleInfo">
+
+	<typeAlias alias="ScheduleInfo" type="com.yq.faurecia.pojo.ScheduleInfo"/>
+  	<select id="findById" resultClass="ScheduleInfo" parameterClass="Integer" remapResults="true">
+  		 select 
+  		 	 id,wo_number,flow_id,dept_id,type,class_id,class_name,emp_id,begin_date,end_date,begin_time,end_time,hours,have_meals,meals,over_hour,remark,user_id,available,check_emp_id,check_state,check_state_date,check_remark,status,next_check_emp_id,create_date,update_date
+		 from tb_schedule_info t 
+  		 where id = #id#
+  	</select>
+  	
+  	<select id="findBySql" resultClass="ScheduleInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="ScheduleInfo">
+  		insert into tb_schedule_info (
+  			wo_number,flow_id,dept_id,type,class_id,class_name,emp_id,begin_date,end_date,begin_time,end_time,hours,have_meals,meals,over_hour,remark,user_id,available,check_emp_id,check_state,check_state_date,check_remark,status,next_check_emp_id,create_date,update_date
+  		) values (
+  			#wo_number#,#flow_id#,#dept_id#,#type#,#class_id#,#class_name#,#emp_id#,#begin_date#,#end_date#,#begin_time#,#end_time#,#hours#,#have_meals#,#meals#,#over_hour#,#remark#,#user_id#,#available#,#check_emp_id#,#check_state#,#check_state_date#,#check_remark#,#status#,#next_check_emp_id#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<update id="update" parameterClass="ScheduleInfo">
+		update tb_schedule_info 
+		   set 	
+		   		flow_id = #flow_id#,
+		   		dept_id = #dept_id#,
+		   		emp_id = #emp_id#,
+		   		class_id = #class_id#,
+		   		class_name = #class_name#,
+		   		type = #type#,
+		   		begin_date = #begin_date#,
+		   		end_date = #end_date#,
+		   		begin_time = #begin_time#,
+				end_time = #end_time#,
+				hours = #hours#,
+				have_meals=#have_meals#,
+				meals = #meals#,
+				over_hour=#over_hour#,
+		   		remark = #remark#,
+		   		user_id = #user_id#,
+		   		available = #available#,
+		   		check_emp_id = #check_emp_id#,
+		   		check_state = #check_state#,
+		   		check_state_date = #check_state_date#,
+		   		check_remark = #check_remark#,
+		   		status = #status#,
+		   		next_check_emp_id = #next_check_emp_id#,
+				update_date = getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>
+	
+	
+	<typeAlias alias="ScheduleInfoHistory" type="com.yq.faurecia.pojo.ScheduleInfoHistory"/>
+  	<insert id="saveHistory" parameterClass="ScheduleInfoHistory">
+  		insert into tb_schedule_info_history (
+  			schedule_info_id,flow_id,dept_id,type,class_id,class_name,emp_id,begin_date,end_date,begin_time,end_time,hours,have_meals,meals,over_hour,remark,user_id,available,check_emp_id,check_state,check_state_date,check_remark,status,next_check_emp_id,create_date,update_date
+  		) values (
+  			#schedule_info_id#,#flow_id#,#dept_id#,#type#,#class_id#,#class_name#,#emp_id#,#begin_date#,#end_date#,#begin_time#,#end_time#,#hours#,#have_meals#,#meals#,#over_hour#,#remark#,#user_id#,#available#,#check_emp_id#,#check_state#,#check_state_date#,#check_remark#,#status#,#next_check_emp_id#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>	
+</sqlMap>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.company.etop5.pojo.KPIType">
+
+	<typeAlias alias="KPIType" type="com.yq.company.etop5.pojo.KPIType"/>
+  	
+  	<select id="findBySql" resultClass="KPIType" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="KPIType">
+  		insert into etop5.dbo.tb_kpi_type (
+  			parent_id,name,state,operater,create_user,create_date,update_date
+  		) values (
+  			#parent_id#,#name#,#state#,#operater#,#create_user#,getdate(),getdate()
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >    
+        	select @@IDENTITY as value    
+    	</selectKey> 
+	</insert>
+	
+  	<update id="update" parameterClass="KPIType">
+		update etop5.dbo.tb_kpi_type 
+		   set 	
+				parent_id=#parent_id#,
+				name=#name#,
+				state=#state#,
+				operater=#operater#,
+				create_user=#create_user#,
+				update_date=getdate()
+		 where id = #id#
+	</update>
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

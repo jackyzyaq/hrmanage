@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.common.pojo.Sequence">
+
+	<typeAlias alias="Sequence" type="com.yq.common.pojo.Sequence"/>
+
+	<!--result map-->
+	<resultMap id="sequenceResult" class="Sequence">
+		<result column="NAME" property="name" jdbcType="String"/>
+		<result column="NEXTID" property="nextId" jdbcType="LONG"/>
+	</resultMap>
+
+
+
+	<statement id="insert" parameterClass="Sequence">
+		insert into tb_sequence
+		(
+		name,
+		nextid
+		)
+		values
+		(
+		#name#,
+		#nextId#
+		)
+	</statement>
+
+	<select id="select" resultMap="sequenceResult">
+		select
+		NAME,
+		NEXTID
+		from tb_sequence
+	</select>
+	
+	<select id="selectByName" parameterClass="String" resultMap="sequenceResult">
+		select
+		NAME,
+		NEXTID
+		from tb_sequence where name=#value#
+	</select>
+	
+	<update id="updateByName" parameterClass="Sequence">
+		update tb_sequence set name=#name#, nextid=#nextId# where name=#name#
+	</update>
+	
+</sqlMap>

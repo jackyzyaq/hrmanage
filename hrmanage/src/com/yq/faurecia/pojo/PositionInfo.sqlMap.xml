@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.PositionInfo">
+
+	<typeAlias alias="PositionInfo" type="com.yq.faurecia.pojo.PositionInfo"/>
+  	
+  	<select id="findById" resultClass="PositionInfo" parameterClass="Integer" remapResults="true">
+  		 select 
+  		 	 id,pos_code,pos_name,state,create_date,update_date,pos01,pos02,pos03,pos04,pos05 
+		 from tb_position_info t 
+  		 where id = #id# and state = 1
+  	</select>
+  	
+  	<select id="findByPosCode" resultClass="PositionInfo" parameterClass="String" remapResults="true">
+		 select 
+		 	id,pos_code,pos_name,state,create_date,update_date,pos01,pos02,pos03,pos04,pos05 
+		 from tb_position_info t 
+  		 where pos_code = #pos_code# and state = 1
+  	</select>  	
+  	
+  	<select id="findBySql" resultClass="PositionInfo" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="PositionInfo">
+  		insert into tb_position_info (
+  			pos_code,pos_name,state,create_date,update_date,pos01,pos02,pos03,pos04,pos05
+  		) values (
+  			#pos_code#,#pos_name#,#state#,getdate(),getdate(),#pos01#,#pos02#,#pos03#,#pos04#,#pos05#
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<update id="update" parameterClass="PositionInfo">
+		update tb_position_info 
+		   set 	pos_code = #pos_code#,
+				pos_name = #pos_name#,
+				state = #state#,
+				pos01 = #pos01#,
+				pos02 = #pos02#,
+				pos03 = #pos03#,
+				pos04 = #pos04#,
+				pos05 = #pos05#,
+				update_date = getdate()
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>

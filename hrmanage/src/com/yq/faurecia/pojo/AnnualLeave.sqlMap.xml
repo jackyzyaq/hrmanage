@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.yq.faurecia.pojo.AnnualLeave">
+
+	<typeAlias alias="AnnualLeave" type="com.yq.faurecia.pojo.AnnualLeave"/>
+  	
+  	<select id="findBySql" resultClass="AnnualLeave" parameterClass="String" remapResults="true">
+  		$sql$
+  	</select>
+  	
+  	<insert id="save" parameterClass="AnnualLeave">
+  		insert into tb_annual_leave (
+  			hr_status_id,state,work_up,work_down,remark,create_date,update_date,leave01,leave02,leave03,leave04,leave05,leave06,leave07,leave08,leave09,leave10
+  		) values (
+  			#hr_status_id#,#state#,#work_up#,#work_down#,#remark#,getdate(),getdate(),#leave01#,#leave02#,#leave03#,#leave04#,#leave05#,#leave06#,#leave07#,#leave08#,#leave09#,#leave10#
+  		)
+  		<selectKey resultClass="int" type="post" keyProperty="id" >   
+        	select @@IDENTITY as value   
+    	</selectKey>
+	</insert>
+	
+  	<update id="update" parameterClass="AnnualLeave">
+		update tb_annual_leave 
+		   set 	
+				hr_status_id=#hr_status_id#,
+				state=#state#,
+				work_up=#work_up#,
+				work_down=#work_down#,
+				remark=#remark#,
+				update_date=getdate(),
+				leave01=#leave01#,
+				leave02=#leave02#,
+				leave03=#leave03#,
+				leave04=#leave04#,
+				leave05=#leave05#,
+				leave06=#leave06#,
+				leave07=#leave07#,
+				leave08=#leave08#,
+				leave09=#leave09#,
+				leave10=#leave10#
+		 where id = #id#
+	</update>	
+	
+  	<update id="executeBySql" parameterClass="String">
+		$sql$
+	</update>	  	
+</sqlMap>
