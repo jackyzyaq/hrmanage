@@ -45,7 +45,7 @@ var breaktime_columns = [[
    					}
 	   			}	
    			},
-   			{field:'update_time',title:'更新时间',width:'140',sortable:false,align:'center'}
+   			{field:'updateTime',title:'更新时间',width:'140',sortable:false,align:'center'}
    		]];
 var breaktime_toolbar = [			
 		<%

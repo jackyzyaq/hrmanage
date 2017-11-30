@@ -212,7 +212,7 @@ $(function(){
 		        type: 'line'
 		    },
 		    title: {
-		        text: '当月日达标情况'
+		        text: '当月达标情况'
 		    },
 		    /* subtitle: {
 		        text: 'Source: WorldClimate.com'

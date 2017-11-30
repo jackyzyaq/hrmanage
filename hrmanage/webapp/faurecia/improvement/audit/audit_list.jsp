@@ -19,19 +19,25 @@
 <jsp:include page="/common/shareJsp/cartHeadEasyUI.jsp"/>
 <script type="text/javascript">
 var breaktime_columns = [[
-			{field:'id',hidden:true},
-			{field:'submitterDeptId',hidden:true},
-			{field:'submitEMId',hidden:true},
-			{field:'submitUserId',hidden:true},
-			{field:'formCode',title:'单号',width:'120',align:'center',sortable:true,hidden:false},
-			{field:'submitterDept',title:'提案部门',width:'140',align:'center',sortable:true,hidden:false},
-			{field:'EMName',title:'提案人',width:'80',align:'center',sortable:true,hidden:false},
-			{field:'latestAuditName',title:'最新操作人',width:'80',align:'center',sortable:false,hidden:false},
-			{field:'statusTxt',title:'最新操作状态',width:'80',align:'center',sortable:false,hidden:false},
-			{field:'nextAuditEMPName',title:'下一操作人',width:'80',align:'center',sortable:false,hidden:false},
-			{field:'createdTime',title:'提交时间',width:'140',sortable:true,align:'center'},
-			{field:'updateTime',title:'更新时间',width:'140',sortable:true,align:'center'}
-		]];
+		{field:'id',hidden:true},
+		{field:'submitterDeptId',hidden:true},
+		{field:'submitEMId',hidden:true},
+		{field:'submitUserId',hidden:true},
+		{field:'status',hidden:true},
+		{field:'auditStep',hidden:true},
+		{field:'generalizaterId',hidden:true},
+		{field:'formCode',title:'单号',width:'100',align:'center',sortable:true,hidden:false},
+		{field:'submitterDept',title:'提案部门',width:'100',align:'center',sortable:true,hidden:false},
+		{field:'EMName',title:'提案人',width:'80',align:'center',sortable:true,hidden:false},
+		{field:'latestAuditName',title:'最新操作人',width:'80',align:'center',sortable:false,hidden:false},
+		{field:'nextAuditEMPName',title:'下一操作人',width:'80',align:'center',sortable:false,hidden:false},
+		{field:'statusTxt',title:'状态',width:'180',align:'center',sortable:false,hidden:false},
+		{field:'currentSituation',title:'目前状况',width:'200',align:'left',sortable:true,hidden:false},
+		{field:'proposedSolution',title:'建议方案',width:'200',align:'left',sortable:true,hidden:false},
+		{field:'generalizaterName',title:'推广人',width:'80',align:'center',sortable:false,hidden:false},
+		{field:'createdTime',title:'提交时间',width:'140',sortable:true,align:'center'},
+		{field:'updateTime',title:'更新时间',width:'140',sortable:true,align:'center'}
+	]];
 var breaktime_toolbar = [			
 	<%
 	for(Integer key:menuInfoMap.keySet()){ 
@@ -72,7 +78,7 @@ var breaktime_toolbar = [
 	<%
 	}
 	%>
-	<%=Util.getHrClose(roleCodes,"/common/breakTimeInfo/breakTimeInvalid.do")%>			
+	<%-- <%=Util.getHrClose(roleCodes,"/common/breakTimeInfo/breakTimeInvalid.do")%> --%>			
 	{
 		text:'刷新',
 		iconCls:'icon-reload',

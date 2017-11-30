@@ -62,10 +62,7 @@
 	});
 	
 	function doSubmit() {
-		//alert($('#status').val());
 		setAuditStatus($('#status').val());
-		//alert($('#status').val());
-		//return false;
 		if (setNextStepInfo()) {
 		  if(confirm('是否提交？')){
 			$('#basic_validate').ajaxSubmit({
@@ -354,19 +351,16 @@
             <input type="hidden" id="submitUserId" name="submitUserId" value="<%=employeeInfo.getId()%>"/>
             <input type="hidden" id="submitterDeptId" name="submitterDeptId" value="<%=employeeInfo.getDept_id()%>"/>
             <input type="hidden" id="latestAuditName" name="latestAuditName" value="<%=employeeInfo.getZh_name()%>"/>
-             <!--<input type="hidden" id="submitUserName" name="submitUserName" value=""/>
-            <input type="hidden" id="submitterDept" name="submitterDept" value=""/>
-            <input type="hidden" id="submitEMId" name="submitEMId" value="" />
-            <input type="hidden" id="EMName" name="EMName" value="" title="员工"/>
-            <input type="hidden" id="EMPNmber" name="EMPNmber" value=""/>
-            <input type="hidden" id="lineManagerId" name="lineManagerId" value=""/>
-            <input type="hidden" id="lineManagerName" name="lineManagerName" value=""/> -->
             <input type="hidden" id="nextAuditEMPId" name="nextAuditEMPId" value=""/>
             <input type="hidden" id="nextAuditEMPName" name="nextAuditEMPName" value=""/>
             <input type="hidden" id="nextAuditDept" name="nextAuditDept" value=""/>
             <input type="hidden" id="nextAuditDeptName" name="nextAuditDeptName" value=""/>
+            <input type="hidden" id="generalizaterName" name="generalizaterName" value=""/>
+            <input type="hidden" id="generalizaterDeptId" name="generalizaterDeptId" value=""/>
+            <input type="hidden" id="generalizaterDept" name="generalizaterDept" value=""/>
+            <input type="hidden" id="generalizaterId" name="generalizaterId" value=""/>
             <input type="hidden" id="status" name="status" value=""/>
-            <div>
+            <div style="padding-top: 20px;">
 				<button type="button" id="ok" onclick="javascript:doSubmit();">确认</button>
 			</div>
 			</div>
@@ -454,6 +448,7 @@
 				showMsgInfo("请勾选相关审核状态后再提交！");
          		return false;
 			}
+			
 			switch (status) {
 		              case 2: //采纳，并指定实施部门
 						  var params = {};
@@ -512,7 +507,7 @@
 		                 break;
 	 				case 7: //实施人确认实施，并交由提交人确认
 	 					if($("#executeDate").val() == '' || $("#executeDate").val() == 'undefined' || $("#executeDate").val() == 'null'){
-	 						showMsgInfo("请选择完成期限！");
+	 						showMsgInfo("请选择实施时间！");
 		         			return false;
 		         		}
 	 					 if(formdata2.submitEMId == formdata2.nextAuditEMPId) {
@@ -532,6 +527,11 @@
 	 						showMsgInfo("请填写推广编号！");
 		         			return false;
 		         		}
+	 					$("#generalizaterName").val('<%=employeeInfo.getZh_name()%>');
+	 					$("#generalizaterId").val('<%=employeeInfo.getId()%>');
+	 					$("#generalizaterDept").val('<%=employeeInfo.getDept_name()%>');
+	 					$("#generalizaterDeptId").val('<%=employeeInfo.getDept_id()%>');
+	 					
 	 					 break;
 		             default:
 		            	showMsgInfo("勾选相关审核状态后再提交！");
