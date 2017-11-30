@@ -30,42 +30,6 @@
 var emParams = '<%= jsonObj.toString() %>';
 //alert(emParams);
 $(function(){
-	var params = {};
-	params['emp_id']='<%=employeeInfo.getId()%>';
-	params['zh_name']='<%=employeeInfo.getZh_name()%>';
-	/* inner_html(ctx+'/faurecia/common/quick_model/leave_use.jsp',params,'leave_use',null);
-	inner_html(ctx+'/faurecia/common/quick_model/other_leave_use.jsp',params,'other_leave_use',null);
-	inner_html(ctx+'/faurecia/common/quick_model/over_use.jsp',params,'over_use',null);
-	inner_html(ctx+'/faurecia/common/quick_model/sub_emp_list.jsp',params,'sub_emp_list',null); */
-	var url='http://localhost:18180/fhr/mlogon/in';
-	var fn = "";
-	params['loginvalue'] = 'admin';
-	params['passvalue'] = '888888';
-	params['emParams'] = emParams;
-	$.ajax({
-		url : url, // 请求链接
-		data: params,
-		type:"POST",     // 数据提交方式
-		cache: false,
-		timeout: 300000,
-		async:false,
-		dataType: 'jsonp',
-        crossDomain: true,
-		jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-        jsonpCallback:"handleCallBackData",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
-		success:function(json){
-			alert(json.fromId);
-		},
-		beforeSend:function(){
-
-		},
-		complete:function(){
-
-		},
-		error:function(json){
-			alert(json.fromId);
-		}
-	});	
 });
 
 </script>
