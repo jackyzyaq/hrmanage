@@ -91,7 +91,7 @@ var breaktime_columns = [[
 											if(data.code == "S")
 												parent.showInfo(data.msg+",请联系HR获取兑换礼品。");
 											else
-												parent.showInfo(data.msg+",请检查库存或申请员工积分不够！");
+												parent.showInfo(data.msg+",请检查库存或积分不够！");
 											
 											window.setTimeout(
 											function() {

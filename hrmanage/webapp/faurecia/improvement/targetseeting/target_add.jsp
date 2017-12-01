@@ -15,21 +15,9 @@
 	try{
 		emp_id = Integer.parseInt(user.getName());
 	}catch(Exception e){
-		
+		e.printStackTrace();
 	}
 	EmployeeInfo employeeInfo = employeeInfoService.queryById(emp_id);
-	if(employeeInfo==null)
-		return ;
-	String flow_type = Global.flow_type[1];
-	Calendar c = Calendar.getInstance();
-	String leader = employeeInfoService.getLeaderIdByDeptId(employeeInfo.getDept_id());
-	EmployeeInfo leaderEMP = new EmployeeInfo();
-	if(StringUtils.isNotEmpty(leader)){
-		String ld[] = leader.split(",");
-		if(leader.split(",").length > 0) {
-			leaderEMP = employeeInfoService.queryById(Integer.parseInt(ld[0]));
-		}
-	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -131,7 +119,7 @@
 					        	<td>
 					        		<input class="Wdate" onclick="wdateInstanceforImp();" type="text" readonly="readonly" id="targetMonthly" name="targetMonthly" value=""/>
 					        	</td>
-					        	<td style="font-weight:bold" align="center">目标部门</td>
+					        	<td style="font-weight:bold" align="center">指标部门</td>
 					        	<td>
 					        		<jsp:include page="/share/jsp/dept_ztree.jsp">
 					        			<jsp:param value="<%=employeeInfo.getDept_id() %>" name="parent_dept_id"/>

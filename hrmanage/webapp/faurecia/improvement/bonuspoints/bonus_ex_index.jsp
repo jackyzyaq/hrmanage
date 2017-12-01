@@ -93,7 +93,7 @@ var breaktime_toolbar = [
 								if(data.code == "S")
 									parent.showInfo(data.msg);
 								else
-									parent.showInfo(data.msg+",请检查库存或申请员工积分不够！");
+									parent.showInfo(data.msg+",请检查库存或积分不够！");
 								
 								window.setTimeout(
 								function() {

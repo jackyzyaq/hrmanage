@@ -127,9 +127,9 @@ $(function(){
 					</thead>
 					<tbody>
 						<tr>
-							<td><a style="cursor:pointer" onclick=""><span id="audit_check"></span></a></td>
-							<td><a style="cursor:pointer" onclick=""><span id="target_value"></span></a></td>
-							<td><a style="cursor:pointer" onclick=""><span id="bonus_points"></span></a></td>
+							<td><a style="cursor:pointer" onclick="jumpLabelPage('/portal/portal_left.jsp','58','236','0');"><span id="audit_check"></span></a></td>
+							<td><a style="cursor:pointer" onclick="jumpLabelPage('/portal/portal_left.jsp','58','240','0');"><span id="target_value"></span></a></td>
+							<td><a style="cursor:pointer" onclick="jumpLabelPage('/portal/portal_left.jsp','58','249','0');"><span id="bonus_points"></span></a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -151,7 +151,7 @@ $(function(){
 	function initMsg(data){
 		//alert(data.auditcheck[0]);
 		$("#audit_check").html(data.auditcheck[0]);
-		var ts = "当月目标：【"+data.imptarget[0]+"】&nbsp;已完成：【"+data.currentmonthimp[0]+"】"
+		var ts = "当月指标：【"+data.imptarget[0]+"】&nbsp;已完成：【"+data.currentmonthimp[0]+"】"
 		$("#target_situation").html(ts);
 		$("#target_value").html(data.imptarget[0]);
 		$("#bonus_points").html(data.bonuspoints[0]);

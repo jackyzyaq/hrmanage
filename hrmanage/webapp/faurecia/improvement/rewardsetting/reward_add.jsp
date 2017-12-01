@@ -144,7 +144,6 @@
 					         <tr>
 								<td style="font-weight:bold" colspan="6">
 									<div id="file_view">
-									
 						    		</div>
 								</td>
 							</tr>	
@@ -154,21 +153,21 @@
 			<jsp:include page="/faurecia/improvement/audit/audit_nodes.jsp">
 				<jsp:param value="<%=formId %>" name="formId"/>
 			</jsp:include>
-			
-			 <div>
-            <input type="hidden" id="empid" name="empid" value="<%=employeeInfo.getId()%>"/>
-            <input type="hidden" id="dept_id" name="dept_id" value="<%=employeeInfo.getDept_id()%>"/>
-             <input type="hidden" id="dept_name" name="dept_name" value="<%=employeeInfo.getDept_name()%>"/>
-             <input type="hidden" id="setting_emp_name" name="setting_emp_name" value="<%=employeeInfo.getZh_name()%>"/>
-             <input type="hidden" id="improve_id" name="improve_id" value="<%=formId%>"/>
-             <br />
-			<button type="button" id="ok" onclick="javascript:doSubmit();">设为本月最佳</button>
+			<jsp:include page="/faurecia/improvement/rewardsetting/reward_edit.jsp"/>
+			<div>
+	            <input type="hidden" id="empid" name="empid" value="<%=employeeInfo.getId()%>"/>
+	            <input type="hidden" id="dept_id" name="dept_id" value="<%=employeeInfo.getDept_id()%>"/>
+	             <input type="hidden" id="dept_name" name="dept_name" value="<%=employeeInfo.getDept_name()%>"/>
+	             <input type="hidden" id="setting_emp_name" name="setting_emp_name" value="<%=employeeInfo.getZh_name()%>"/>
+	             <input type="hidden" id="improve_id" name="improve_id" value="<%=formId%>"/>
+	             <input type="hidden" id="type" value=""/>
+			<button type="button" id="ok" onclick="javascript:doSubmit();">设为最佳</button>
 			</div>
 		</form>
 	</div>
 	<script type="text/javascript">
 	function doSubmit() {
-		//if (validateForm()) {
+		if (validateForm()) {
 		if(confirm('是否提交？')){
 			$('#basic_validate').ajaxSubmit({
 				success : function(data) {
@@ -191,8 +190,24 @@
 				}
 			});
 		}
-		//}
+		}
 		return false;
+	}
+	
+	function validateForm(){
+		var type_id = $("#type_id").val();
+		if(type_id == '' || type_id == 'undefined'){
+ 			showMsgInfo("请勾选设置类型！");
+ 			return false;
+ 		}
+		
+		var reword_value = $("#reword_value").val();
+		if(reword_value == '' || reword_value == 'undefined'){
+ 			showMsgInfo("请选择最佳的月度或年度值！");
+ 			return false;
+ 		}
+		
+		return true;
 	}
 	</script>
 </body>

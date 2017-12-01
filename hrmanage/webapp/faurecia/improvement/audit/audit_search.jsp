@@ -28,7 +28,7 @@
 %>
 <div id="search" class="overviewhead">
 	<%if(!isCheck){%>
-		<jsp:include page="/share/jsp/dept_role_ztree_checkbox.jsp"></jsp:include>
+		<%-- <jsp:include page="/share/jsp/dept_role_ztree_checkbox.jsp"></jsp:include> --%>
 		<input type="hidden" id="depts" name="depts" value="<%=deptIds%>"/>
 		<input type="hidden" id="submitEMId" name="submitEMId" value="<%=emp_id%>"/>
 		<input type="hidden" id="executorId" name="executorId" value="<%=emp_id%>"/>

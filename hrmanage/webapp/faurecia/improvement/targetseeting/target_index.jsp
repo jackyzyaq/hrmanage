@@ -55,7 +55,7 @@ var breaktime_columns = [[
 							<%if(employeeInfo==null){ %>
 								parent.showInfo("用户与员工没有关联，请联系HR！");
 							<%}else{%>
-								parent.showHtml(ctx+"<%=mi.getUrl()%>?menu_id=<%=mi.getId()%>","合理化建议目标设定 - <%=mi.getMenu_name()%>",900);
+								parent.showHtml(ctx+"<%=mi.getUrl()%>?menu_id=<%=mi.getId()%>","合理化建议目标设定 - <%=mi.getMenu_name()%>",900,260);
 							<%}%>
 						<%}else if(mi.getMenu_code().indexOf("_edit_")>-1){%>
 							<%if(employeeInfo==null){ %>
@@ -66,7 +66,7 @@ var breaktime_columns = [[
 									parent.showInfo('请选择一项进行操作！');
 									return false;
 								}
- 								parent.showHtml(ctx+"<%=mi.getUrl()%>?menu_id=<%=mi.getId()%>"+"&id="+rows[0].id,"合理化建议目标设定- <%=mi.getMenu_name()%> ",900);
+ 								parent.showHtml(ctx+"<%=mi.getUrl()%>?menu_id=<%=mi.getId()%>"+"&id="+rows[0].id,"合理化建议目标设定- <%=mi.getMenu_name()%> ",900,260);
 							<%}%>
 						<%}%>
 					}

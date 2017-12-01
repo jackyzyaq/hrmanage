@@ -43,7 +43,7 @@ var breaktime_columns = [[
    			},
    			{field:'orderId',title:'订单号',width:'120',align:'center',sortable:false,hidden:false},
    			{field:'improveCode',title:'建议编号',width:'120',align:'center',sortable:false,hidden:false},
-   			{field:'update_time',title:'更新时间',width:'140',sortable:false,align:'center'}
+   			{field:'updateTime',title:'更新时间',width:'140',sortable:false,align:'center'}
    		]];
 		var breaktime_toolbar = [];	
 		function queryResult(){

@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ include file="/share/jsp/cartTag.jsp"%>
-<%@ page import="com.yq.faurecia.pojo.*"%>
-<%@ page import="com.yq.faurecia.service.*"%>
-<%@ page import="com.yq.authority.pojo.UserInfo" %>
 <%
 	String formId=request.getParameter("formId");
 %>
@@ -85,7 +82,6 @@
                 </tr>
             </thead>
             <tbody>
-            	
             </tbody>
         </table>
     </div><!--widgetcontent-->
