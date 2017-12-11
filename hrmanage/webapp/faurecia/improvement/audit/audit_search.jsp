@@ -3,6 +3,7 @@
 <%@ page import="com.yq.faurecia.pojo.*"%>
 <%@ page import="com.yq.faurecia.service.*"%>
 <%@ page import="com.yq.authority.pojo.UserInfo" %>
+<%@ include file="/faurecia/improvement/connector.jsp"%>
 <%
 	boolean isSH = Boolean.parseBoolean(StringUtils.defaultIfEmpty(request.getParameter("isSH"), "false"));
 	boolean isAllEmp = Boolean.parseBoolean(StringUtils.defaultIfEmpty(request.getParameter("isAllEmp"), "false"));

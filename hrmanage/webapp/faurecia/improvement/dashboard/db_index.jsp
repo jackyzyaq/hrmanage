@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
-<%@ include file="/share/jsp/cartTag.jsp"%>
+<%@ include file="/common/shareJsp/cartHead.jsp" %>
 <%@ page import="com.yq.authority.pojo.*"%>
 <%@ page import="com.yq.authority.service.*"%>
 <%@ page import="com.yq.faurecia.pojo.*"%>
 <%@ page import="com.yq.faurecia.service.*"%>
 <%@ page import="com.yq.authority.pojo.UserInfo"%>
 <%@ page import="net.sf.json.JSONObject"%>
+<%@ include file="/faurecia/improvement/connector.jsp"%>
 <%
     EmployeeInfo employeeInfo = (EmployeeInfo)session.getAttribute("employeeInfo");
 	ServletContext st = request.getSession().getServletContext();
@@ -19,17 +20,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<jsp:include page="/common/shareJsp/cartHead.jsp" />
 <script src="${ctx}/faurecia/improvement/dashboard/js/highcharts.js"></script>
 <script type="text/javascript">
-<%-- var emParams = '<%= jsonObj.toString() %>'; --%>
-//alert(emParams);
 $(function(){
 		var params = {};
 		var url= '${improve}' + '/fhrapi/db/dbindex';
 		params['depts'] = $("#deptIds").val();
 		params['EMPId'] = '<%= employeeInfo.getId()%>';
-		//alert(params['depts']);
 		$.ajax({
 			url : url, // 请求链接
 			data: params,
@@ -58,9 +55,9 @@ $(function(){
 	        <div class="widgetbox">
 				<div class="title">
 					<h3>
-						<Strong>所属部门</Strong>：<%=Util.getDeptAllNameById(employeeInfo.getDept_id(), Global.departmentInfoMap) %>
+						所属部门：<%=Util.getDeptAllNameById(employeeInfo.getDept_id(), Global.departmentInfoMap) %>
 						&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-						<Strong>直属主管</Strong>：
+						直属主管：
 						<jsp:include page="/share/jsp/leaderAll.jsp">
 									<jsp:param value="<%=employeeInfo.getDept_id() %>" name="dept_id"/>
 									<jsp:param value="<%=employeeInfo.getZh_name() %>" name="zh_name"/>
@@ -72,7 +69,7 @@ $(function(){
 				<div class="title">
 					<h3><span id="target_situation"></span></h3>
 				</div></div>
-			<div style="display: inline;">
+			<div style="display: inline;font-size: 12px;">
 				<div class="one_third">
 					<div id="month_kpi" style="border: 0.5px;color:read; ">月报表</div>
 				</div><!--one_half-->
@@ -80,12 +77,12 @@ $(function(){
 					<div id="daily_kpi">日报表</div>
 				</div>
 			</div>
-			<div class="widgetbox" style="display: inline-block;width: 80%;">
+			<div class="widgetbox" style="display: inline-block;width: 80%;font-size: 12px;">
 				<div class="title">
 					<h3>最佳（<span id="reward_date"></span>）</h3>
 				</div>
 				<div class="widgetcontent padding0 statement">
-					<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+					<table cellpadding="0" cellspacing="0" border="0" class="stdtable" style="font-size: 12px;">
 						<thead>
 							<tr>
 								<th	class="head1">编号</th>
@@ -106,18 +103,12 @@ $(function(){
 				</div>
 			<!--widgetcontent-->
 			</div>
-			<br />
             <div class="widgetbox" style="display: inline-block;width: 80%;">
 			<div class="title">
 				<h3>提醒</h3>
 			</div>
 			<div class="widgetcontent padding0 statement">
-				<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
-					<colgroup>
-						<col class="con0" />
-						<col class="con1" />
-						<col class="con0" />
-					</colgroup>
+				<table cellpadding="0" cellspacing="0" border="0" class="stdtable" style="font-size: 12px;">
 					<thead>
 						<tr>
 							<th class="head0">审批</th>
@@ -180,9 +171,9 @@ $(function(){
 		        title: ''
 		    },
 		    tooltip: {
-		        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-		        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-		            '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
+		        headerFormat: '<span style="font-size:10px">{point.key}</span><table style="font-size: 10px;width: 80px;">',
+		        pointFormat: '<tr align="left"><td style="color:{series.color};padding:0;text-align: left;">{series.name}: </td>' +
+		            '<td style="padding:0;text-align: left;"><b>{point.y:.0f}</b></td></tr>',
 		        footerFormat: '</table>',
 		        shared: true,
 		        useHTML: true
@@ -226,7 +217,7 @@ $(function(){
 		        title: ''
 		    },
 		    tooltip: {
-		        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+		        headerFormat: '<span style="font-size:10px">{point.key}</span><table style="font-size: 10px;width: 80px;">',
 		        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
 		            '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
 		        footerFormat: '</table>',

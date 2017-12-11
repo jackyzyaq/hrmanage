@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ include file="/share/jsp/cartTag.jsp"%>
+<%@ include file="/faurecia/improvement/connector.jsp"%>
 <div id="search" class="overviewhead">
 	单号：&nbsp;<input type="text" id="formCode" name="formCode" value=""/>&nbsp;
 	部门：&nbsp;<input type="text" id="submitterDept" name="submitterDept" value=""/>&nbsp;

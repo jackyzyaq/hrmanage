@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ include file="/share/jsp/cartTag.jsp"%>
+<%@ include file="/faurecia/improvement/connector.jsp"%>
 <script type="text/javascript">
 
 function wdateInstanceforImp(){

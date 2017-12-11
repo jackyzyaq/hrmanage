@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ include file="/share/jsp/cartTag.jsp"%>
+<%@ include file="/faurecia/improvement/connector.jsp"%>
 <%@ page import="com.yq.faurecia.pojo.*"%>
 <%@ page import="com.yq.faurecia.service.*"%>
 <%@ page import="com.yq.authority.pojo.UserInfo" %>

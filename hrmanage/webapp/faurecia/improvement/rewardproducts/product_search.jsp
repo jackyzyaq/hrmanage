@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ include file="/share/jsp/cartTag.jsp"%>
+<%@ include file="/faurecia/improvement/connector.jsp"%>
 <div id="search" class="overviewhead">
 	礼品名：&nbsp;<input id="proname" name="proname" value=""/>&nbsp;
 	积分（小于）：&nbsp;<input id="BPValues" name="BPValues" value=""/>&nbsp;

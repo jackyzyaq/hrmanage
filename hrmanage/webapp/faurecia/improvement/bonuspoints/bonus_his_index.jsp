@@ -4,6 +4,7 @@
 <%@ page import="com.yq.authority.service.*"%>
 <%@ page import="com.yq.faurecia.pojo.*"%>
 <%@ page import="com.yq.faurecia.service.*"%>
+<%@ include file="/faurecia/improvement/connector.jsp"%>
 <%
 	EmployeeInfo employeeInfo = (EmployeeInfo)session.getAttribute("employeeInfo");
     Map<Integer,MenuInfo> menuInfoMap = (Map<Integer,MenuInfo>)session.getAttribute("menuRole");

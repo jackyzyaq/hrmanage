@@ -6,6 +6,7 @@
 <%@ page import="com.yq.faurecia.service.*"%>
 <%@ page import="com.yq.authority.pojo.UserInfo"%>
 <%@ page import="net.sf.json.JSONObject"%>
+<%@ include file="/faurecia/improvement/connector.jsp"%>
 <%
     ServletContext st = request.getSession().getServletContext();
 	ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(st);

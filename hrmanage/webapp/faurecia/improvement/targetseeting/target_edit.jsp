@@ -3,6 +3,7 @@
 <%@ page import="com.yq.faurecia.pojo.*"%>
 <%@ page import="com.yq.faurecia.service.*"%>
 <%@ page import="com.yq.authority.pojo.UserInfo" %>
+<%@ include file="/faurecia/improvement/connector.jsp"%>
 <%
 	String formId=request.getParameter("id");
 	UserInfo user = (UserInfo)session.getAttribute("user");

@@ -3,6 +3,7 @@
 <%@ page import="com.yq.faurecia.pojo.*"%>
 <%@ page import="com.yq.faurecia.service.*"%>
 <%@ page import="com.yq.authority.pojo.UserInfo" %>
+<%@ include file="/faurecia/improvement/connector.jsp"%>
 <%
 	UserInfo user = (UserInfo)session.getAttribute("user");
 	SimpleDateFormat sdf = new SimpleDateFormat(Global.DATE_FORMAT_STR_A);
